@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>알림 메시지 템플릿 | CANDELA KOREA</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --purple-deep: #2D0A3E;
+    --purple-mid: #3D0D52;
+    --purple-light: #5a1a7a;
+    --magenta: #C850A0;
+    --bg: #f5f2f9;
+    --gray-200: #ede8f2;
+    --gray-400: #b0a0bc;
+    --gray-600: #6b5c7a;
+    --text: #1a0a24;
+    --radius: 10px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Noto Sans KR', sans-serif; background: var(--bg); color: var(--text); }
+
+  .topnav {
+    background: var(--purple-deep);
+    padding: 0 32px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 52px;
+  }
+  .nav-logo { display: flex; align-items: center; gap: 8px; text-decoration: none; }
+  .nav-dot { width: 9px; height: 9px; background: var(--magenta); border-radius: 50%; }
+  .nav-name { color: #fff; font-size: 15px; font-weight: 700; letter-spacing: 1.5px; }
+  .nav-right { font-size: 11px; color: rgba(255,255,255,0.45); }
+
+  .hero {
+    background: var(--purple-mid);
+    padding: 28px 32px;
+    border-bottom: 1px solid var(--purple-light);
+  }
+  .hero h1 { font-size: 20px; font-weight: 700; color: #fff; margin-bottom: 5px; }
+  .hero p { font-size: 12px; color: rgba(255,255,255,0.6); line-height: 1.6; }
+
+  .container { max-width: 900px; margin: 28px auto; padding: 0 16px 40px; }
+
+  .tab-bar {
+    display: flex;
+    gap: 6px;
+    margin-bottom: 20px;
+    background: #fff;
+    border: 1px solid var(--gray-200);
+    border-radius: var(--radius);
+    padding: 6px;
+  }
+  .tab {
+    flex: 1;
+    text-align: center;
+    padding: 9px 10px;
+    font-size: 12px;
+    font-weight: 700;
+    border-radius: 7px;
+    cursor: pointer;
+    transition: all 0.15s;
+    color: var(--gray-600);
+  }
+  .tab.active { background: var(--purple-deep); color: #fff; }
+  .tab:hover:not(.active) { background: var(--bg); }
+
+  .template-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+
+  .tmpl-card {
+    background: #fff;
+    border-radius: var(--radius);
+    border: 1px solid var(--gray-200);
+    overflow: hidden;
+  }
+  .tmpl-header {
+    padding: 14px 18px;
+    border-bottom: 1px solid var(--gray-200);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .tmpl-title-wrap { display: flex; align-items: center; gap: 8px; }
+  .tmpl-icon { font-size: 16px; }
+  .tmpl-title { font-size: 13px; font-weight: 700; }
+  .tmpl-badge {
+    font-size: 10px;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 20px;
+    letter-spacing: 0.3px;
+  }
+  .badge-sms { background: #E6F1FB; color: #0C447C; }
+  .badge-kakao { background: #FAEEDA; color: #633806; }
+  .badge-email { background: #EAF3DE; color: #27500A; }
+  .badge-yongma { background: #EEEDFE; color: #3C3489; }
+
+  .tmpl-body { padding: 18px; }
+
+  /* 모바일 미리보기 */
+  .phone-frame {
+    width: 200px;
+    margin: 0 auto 14px;
+    background: #1c1c1e;
+    border-radius: 28px;
+    padding: 10px 8px;
+    position: relative;
+  }
+  .phone-notch {
+    width: 60px;
+    height: 6px;
+    background: #3a3a3c;
+    border-radius: 3px;
+    margin: 0 auto 8px;
+  }
+  .phone-screen {
+    background: #f2f2f7;
+    border-radius: 20px;
+    padding: 10px 10px;
+    min-height: 120px;
+  }
+  .msg-bubble {
+    background: #fff;
+    border-radius: 14px 14px 14px 4px;
+    padding: 10px 12px;
+    font-size: 10px;
+    line-height: 1.7;
+    color: #1c1c1e;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    white-space: pre-wrap;
+  }
+  .msg-sender {
+    font-size: 9px;
+    color: #8e8e93;
+    margin-bottom: 4px;
+    font-weight: 700;
+  }
+  .msg-time { font-size: 9px; color: #8e8e93; text-align: right; margin-top: 4px; }
+
+  /* 카카오 미리보기 */
+  .kakao-bubble {
+    background: #FEE500;
+    border-radius: 12px;
+    padding: 12px;
+    font-size: 10px;
+    line-height: 1.7;
+    color: #1a1a1a;
+    white-space: pre-wrap;
+  }
+  .kakao-btn {
+    background: rgba(0,0,0,0.06);
+    border-radius: 7px;
+    padding: 6px;
+    text-align: center;
+    font-size: 10px;
+    font-weight: 700;
+    color: #333;
+    margin-top: 8px;
+  }
+
+  /* 이메일 미리보기 */
+  .email-frame {
+    border: 1px solid var(--gray-200);
+    border-radius: 8px;
+    overflow: hidden;
+    margin-bottom: 14px;
+    font-size: 11px;
+  }
+  .email-header-bar {
+    background: var(--purple-deep);
+    color: #fff;
+    padding: 10px 14px;
+    font-weight: 700;
+    font-size: 11px;
+    letter-spacing: 0.5px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .email-meta { background: #f8f5fc; padding: 10px 14px; border-bottom: 1px solid var(--gray-200); }
+  .email-meta-row { display: flex; gap: 8px; font-size: 10px; color: var(--gray-600); margin-bottom: 3px; }
+  .email-meta-key { font-weight: 700; min-width: 36px; }
+  .email-content { padding: 14px; font-size: 11px; line-height: 1.8; color: var(--text); white-space: pre-wrap; }
+  .email-footer-bar { background: var(--bg); padding: 8px 14px; font-size: 10px; color: var(--gray-400); text-align: center; }
+
+  /* 복사 버튼 */
+  .copy-area {
+    background: var(--bg);
+    border: 1px solid var(--gray-200);
+    border-radius: 8px;
+    padding: 12px;
+    font-size: 11px;
+    line-height: 1.8;
+    color: var(--text);
+    white-space: pre-wrap;
+    position: relative;
+  }
+  .copy-btn {
+    width: 100%;
+    margin-top: 10px;
+    background: var(--purple-deep);
+    color: #fff;
+    border: none;
+    border-radius: 7px;
+    padding: 9px;
+    font-size: 12px;
+    font-weight: 700;
+    cursor: pointer;
+    font-family: 'Noto Sans KR', sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    transition: opacity 0.15s;
+  }
+  .copy-btn:hover { opacity: 0.85; }
+  .copy-btn.copied { background: #1a7a4a; }
+
+  @media (max-width: 620px) {
+    .template-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="topnav">
+  <a class="nav-logo" href="#">
+    <div class="nav-dot"></div>
+    <span class="nav-name">CANDELA KOREA</span>
+  </a>
+  <span class="nav-right">알림 메시지 템플릿</span>
+</nav>
+
+<div class="hero">
+  <h1>접수 알림 메시지 템플릿</h1>
+  <p>공병 회수 접수 단계별로 병원에 발송되는 문자/알림톡/이메일 템플릿입니다.<br>각 단계에 맞게 복사하여 사용하세요.</p>
+</div>
+
+<div class="container">
+
+  <!-- 탭 -->
+  <div class="tab-bar">
+    <div class="tab active" onclick="showTab('sms', this)">📱 문자(SMS)</div>
+    <div class="tab" onclick="showTab('kakao', this)">💛 카카오 알림톡</div>
+    <div class="tab" onclick="showTab('email', this)">📧 이메일</div>
+    <div class="tab" onclick="showTab('yongma', this)">🚚 용마로지스 전달</div>
+  </div>
+
+  <!-- SMS 탭 -->
+  <div id="tab-sms">
+    <div class="template-grid">
+
+      <!-- 접수 완료 문자 -->
+      <div class="tmpl-card">
+        <div class="tmpl-header">
+          <div class="tmpl-title-wrap">
+            <span class="tmpl-icon">✅</span>
+            <span class="tmpl-title">접수 완료</span>
+          </div>
+          <span class="tmpl-badge badge-sms">SMS</span>
+        </div>
+        <div class="tmpl-body">
+          <div class="phone-frame">
+            <div class="phone-notch"></div>
+            <div class="phone-screen">
+              <div class="msg-sender">캔델라코리아</div>
+              <div class="msg-bubble">[캔델라코리아]
+○○성형외과 원장님,
+DCD 공병 회수 접수가 완료되었습니다.
+
+▶ 접수번호: CDL-240115-1234
+▶ 박스 수량: 3박스
+▶ 증정 캔: 3캔
+
+수거 일정 확정 시 재안내 드립니다.
+문의: 02-0000-0000</div>
+              <div class="msg-time">오전 9:23</div>
+            </div>
+          </div>
+          <div class="copy-area" id="sms-1">[캔델라코리아]
+{병원명} 원장님,
+DCD 공병 회수 접수가 완료되었습니다.
+
+▶ 접수번호: {접수번호}
+▶ 박스 수량: {박스수량}박스
+▶ 증정 캔: {증정캔수량}캔
+
+수거 일정 확정 시 재안내 드립니다.
+문의: 02-0000-0000</div>
+          <button class="copy-btn" onclick="copyText('sms-1', this)">📋 복사하기</button>
+        </div>
+      </div>
+
+      <!-- 수거 예정 문자 -->
+      <div class="tmpl-card">
+        <div class="tmpl-header">
+          <div class="tmpl-title-wrap">
+            <span class="tmpl-icon">🚚</span>
+            <span class="tmpl-title">수거 일정 안내</span>
+          </div>
+          <span class="tmpl-badge badge-sms">SMS</span>
+        </div>
+        <div class="tmpl-body">
+          <div class="phone-frame">
+            <div class="phone-notch"></div>
+            <div class="phone-screen">
+              <div class="msg-sender">캔델라코리아</div>
+              <div class="msg-bubble">[캔델라코리아]
+○○성형외과 원장님,
+공병 수거 일정을 안내드립니다.
+
+▶ 수거 예정일: 1월 17일(수)
+▶ 수거 기사: 용마로지스
+▶ 연락처: 010-0000-0000
+
+공병을 입구에 준비해 주세요.
+문의: 02-0000-0000</div>
+              <div class="msg-time">오전 10:00</div>
+            </div>
+          </div>
+          <div class="copy-area" id="sms-2">[캔델라코리아]
+{병원명} 원장님,
+공병 수거 일정을 안내드립니다.
+
+▶ 수거 예정일: {수거예정일}
+▶ 수거 기사: 용마로지스
+▶ 연락처: {기사연락처}
+
+공병을 입구에 준비해 주세요.
+문의: 02-0000-0000</div>
+          <button class="copy-btn" onclick="copyText('sms-2', this)">📋 복사하기</button>
+        </div>
+      </div>
+
+      <!-- 수거 완료 + 프로모션 발송 -->
+      <div class="tmpl-card">
+        <div class="tmpl-header">
+          <div class="tmpl-title-wrap">
+            <span class="tmpl-icon">🎁</span>
+            <span class="tmpl-title">수거 완료 + 프로모션 발송</span>
+          </div>
+          <span class="tmpl-badge badge-sms">SMS</span>
+        </div>
+        <div class="tmpl-body">
+          <div class="phone-frame">
+            <div class="phone-notch"></div>
+            <div class="phone-screen">
+              <div class="msg-sender">캔델라코리아</div>
+              <div class="msg-bubble">[캔델라코리아]
+○○성형외과 원장님,
+DCD 공병 수거가 완료되었습니다. 🎉
+
+프로모션 DCD 3캔을 발송해 드립니다.
+▶ 운송장번호: 1234-5678-9012
+
+도착까지 1~2일 소요됩니다.
+감사합니다 :)</div>
+              <div class="msg-time">오후 3:15</div>
+            </div>
+          </div>
+          <div class="copy-area" id="sms-3">[캔델라코리아]
+{병원명} 원장님,
+DCD 공병 수거가 완료되었습니다. 🎉
+
+프로모션 DCD {증정캔수량}캔을 발송해 드립니다.
+▶ 운송장번호: {운송장번호}
+
+도착까지 1~2일 소요됩니다.
+감사합니다 :)</div>
+          <button class="copy-btn" onclick="copyText('sms-3', this)">📋 복사하기</button>
+        </div>
+      </div>
+
+      <!-- 변수 안내 -->
+      <div class="tmpl-card">
+        <div class="tmpl-header">
+          <div class="tmpl-title-wrap">
+            <span class="tmpl-icon">📌</span>
+            <span class="tmpl-title">템플릿 변수 안내</span>
+          </div>
+        </div>
+        <div class="tmpl-body">
+          <div style="font-size:12px;line-height:2;color:var(--gray-600)">
+            <div style="display:flex;gap:10px;padding:5px 0;border-bottom:1px solid var(--gray-200)"><span style="font-weight:700;color:var(--purple-deep);min-width:130px">{병원명}</span><span>접수 시 입력한 병원명</span></div>
+            <div style="display:flex;gap:10px;padding:5px 0;border-bottom:1px solid var(--gray-200)"><span style="font-weight:700;color:var(--purple-deep);min-width:130px">{접수번호}</span><span>자동 생성 접수번호</span></div>
+            <div style="display:flex;gap:10px;padding:5px 0;border-bottom:1px solid var(--gray-200)"><span style="font-weight:700;color:var(--purple-deep);min-width:130px">{박스수량}</span><span>회수 신청 박스 수</span></div>
+            <div style="display:flex;gap:10px;padding:5px 0;border-bottom:1px solid var(--gray-200)"><span style="font-weight:700;color:var(--purple-deep);min-width:130px">{증정캔수량}</span><span>프로모션 증정 캔 수</span></div>
+            <div style="display:flex;gap:10px;padding:5px 0;border-bottom:1px solid var(--gray-200)"><span style="font-weight:700;color:var(--purple-deep);min-width:130px">{수거예정일}</span><span>담당자가 직접 입력</span></div>
+            <div style="display:flex;gap:10px;padding:5px 0;border-bottom:1px solid var(--gray-200)"><span style="font-weight:700;color:var(--purple-deep);min-width:130px">{기사연락처}</span><span>용마로지스 배차 후 입력</span></div>
+            <div style="display:flex;gap:10px;padding:5px 0"><span style="font-weight:700;color:var(--purple-deep);min-width:130px">{운송장번호}</span><span>프로모션 발송 후 입력</span></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 카카오 탭 -->
+  <div id="tab-kakao" style="display:none">
+    <div class="template-grid">
+      <div class="tmpl-card">
+        <div class="tmpl-header">
+          <div class="tmpl-title-wrap"><span class="tmpl-icon">✅</span><span class="tmpl-title">접수 완료 알림톡</span></div>
+          <span class="tmpl-badge badge-kakao">카카오</span>
+        </div>
+        <div class="tmpl-body">
+          <div class="phone-frame">
+            <div class="phone-notch"></div>
+            <div class="phone-screen">
+              <div class="msg-sender">캔델라코리아</div>
+              <div class="kakao-bubble">📦 DCD 공병 회수 접수 완료
+
+안녕하세요, {병원명} 담당자님.
+DCD 공병 회수 접수가 완료되었습니다.
+
+✔ 접수번호: CDL-240115-1234
+✔ 박스 수량: 3박스 (공병 45캔)
+✔ 프로모션: DCD 3캔 증정 예정
+
+수거 일정은 별도로 안내 드립니다.
+<div class="kakao-btn">접수 내역 확인하기</div></div>
+            </div>
+          </div>
+          <div class="copy-area" id="kko-1">📦 DCD 공병 회수 접수 완료
+
+안녕하세요, {병원명} 담당자님.
+DCD 공병 회수 접수가 완료되었습니다.
+
+✔ 접수번호: {접수번호}
+✔ 박스 수량: {박스수량}박스 (공병 {총캔수}캔)
+✔ 프로모션: DCD {증정캔수량}캔 증정 예정
+
+수거 일정은 별도로 안내 드립니다.
+문의: 02-0000-0000 | 캔델라코리아</div>
+          <button class="copy-btn" onclick="copyText('kko-1', this)">📋 복사하기</button>
+        </div>
+      </div>
+
+      <div class="tmpl-card">
+        <div class="tmpl-header">
+          <div class="tmpl-title-wrap"><span class="tmpl-icon">🎁</span><span class="tmpl-title">수거완료 + 프로모션 알림톡</span></div>
+          <span class="tmpl-badge badge-kakao">카카오</span>
+        </div>
+        <div class="tmpl-body">
+          <div class="phone-frame">
+            <div class="phone-notch"></div>
+            <div class="phone-screen">
+              <div class="msg-sender">캔델라코리아</div>
+              <div class="kakao-bubble">🎉 수거 완료 & 프로모션 발송
+
+{병원명} 담당자님,
+공병 수거가 완료되었으며
+프로모션 제품을 발송하였습니다.
+
+✔ 증정 품목: DCD 3캔
+✔ 택배사: CJ대한통운
+✔ 운송장: 1234-5678-9012
+
+이용해 주셔서 감사합니다.
+<div class="kakao-btn">운송장 조회하기</div></div>
+            </div>
+          </div>
+          <div class="copy-area" id="kko-2">🎉 수거 완료 & 프로모션 발송
+
+{병원명} 담당자님,
+공병 수거가 완료되었으며
+프로모션 제품을 발송하였습니다.
+
+✔ 증정 품목: DCD {증정캔수량}캔
+✔ 택배사: CJ대한통운
+✔ 운송장: {운송장번호}
+
+이용해 주셔서 감사합니다.
+문의: 02-0000-0000 | 캔델라코리아</div>
+          <button class="copy-btn" onclick="copyText('kko-2', this)">📋 복사하기</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 이메일 탭 -->
+  <div id="tab-email" style="display:none">
+    <div class="tmpl-card">
+      <div class="tmpl-header">
+        <div class="tmpl-title-wrap"><span class="tmpl-icon">📧</span><span class="tmpl-title">접수 완료 이메일</span></div>
+        <span class="tmpl-badge badge-email">이메일</span>
+      </div>
+      <div class="tmpl-body">
+        <div class="email-frame">
+          <div class="email-header-bar">● CANDELA KOREA — 공병 회수 접수 확인</div>
+          <div class="email-meta">
+            <div class="email-meta-row"><span class="email-meta-key">발신</span><span>noreply@candelakorea.com (캔델라코리아)</span></div>
+            <div class="email-meta-row"><span class="email-meta-key">수신</span><span>{병원 담당자 이메일}</span></div>
+            <div class="email-meta-row"><span class="email-meta-key">제목</span><span>[캔델라코리아] DCD 공병 회수 접수가 완료되었습니다 (CDL-240115-1234)</span></div>
+          </div>
+          <div class="email-content">안녕하세요, {병원명} 담당자님.
+
+캔델라코리아 DCD 공병 회수 접수가 정상적으로 완료되었습니다.
+
+─────────────────────────────
+  접수 상세 내역
+─────────────────────────────
+  접수번호  :  CDL-240115-1234
+  접수일시  :  2024-01-15 09:23
+  병원명    :  ○○성형외과
+  주소      :  서울 강남구 테헤란로 123
+  박스 수량 :  3박스 (공병 45캔)
+  프로모션  :  DCD 3캔 증정 예정
+─────────────────────────────
+
+담당자가 접수 내역을 확인 후 수거 일정을 별도로 안내드립니다.
+수거 완료 후 프로모션 DCD 제품이 발송됩니다.
+
+문의사항은 아래로 연락해 주세요.
+📞 02-0000-0000  |  📧 info@candelakorea.com
+
+감사합니다.
+캔델라코리아 드림</div>
+          <div class="email-footer-bar">© 2024 CANDELA KOREA. 서울특별시 ○○구 ○○로 00 | 수신거부</div>
+        </div>
+        <div class="copy-area" id="email-1">제목: [캔델라코리아] DCD 공병 회수 접수가 완료되었습니다 ({접수번호})
+
+안녕하세요, {병원명} 담당자님.
+
+캔델라코리아 DCD 공병 회수 접수가 정상적으로 완료되었습니다.
+
+─────────────────────────────
+  접수 상세 내역
+─────────────────────────────
+  접수번호  :  {접수번호}
+  접수일시  :  {접수일시}
+  병원명    :  {병원명}
+  주소      :  {상세주소}
+  박스 수량 :  {박스수량}박스 (공병 {총캔수}캔)
+  프로모션  :  DCD {증정캔수량}캔 증정 예정
+─────────────────────────────
+
+담당자가 접수 내역을 확인 후 수거 일정을 별도로 안내드립니다.
+수거 완료 후 프로모션 DCD 제품이 발송됩니다.
+
+문의사항은 아래로 연락해 주세요.
+📞 02-0000-0000  |  📧 info@candelakorea.com
+
+감사합니다.
+캔델라코리아 드림</div>
+        <button class="copy-btn" onclick="copyText('email-1', this)">📋 이메일 내용 복사</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 용마로지스 탭 -->
+  <div id="tab-yongma" style="display:none">
+    <div class="tmpl-card">
+      <div class="tmpl-header">
+        <div class="tmpl-title-wrap"><span class="tmpl-icon">🚚</span><span class="tmpl-title">용마로지스 수거 요청 전달 양식</span></div>
+        <span class="tmpl-badge badge-yongma">용마로지스</span>
+      </div>
+      <div class="tmpl-body" style="display:grid;grid-template-columns:1fr 1fr;gap:18px">
+        <div>
+          <p style="font-size:12px;font-weight:700;color:var(--gray-600);margin-bottom:10px">📞 전화 전달 시 읽어주세요</p>
+          <div class="copy-area" id="yongma-1">안녕하세요, 캔델라코리아입니다.
+DCD 공병 수거 배차 요청드립니다.
+
+■ 수거지 정보
+- 병원명: {병원명}
+- 연락처: {연락처}
+- 주소: {상세주소}
+
+■ 수거 내용
+- 박스 수량: {박스수량}박스
+- 특이사항: {특이사항}
+
+■ 접수번호: {접수번호}
+
+수거 완료 후 캔델라코리아로
+입고 부탁드립니다.
+감사합니다.</div>
+          <button class="copy-btn" onclick="copyText('yongma-1', this)">📋 복사하기</button>
+        </div>
+        <div>
+          <p style="font-size:12px;font-weight:700;color:var(--gray-600);margin-bottom:10px">📨 문자/메시지 전달 시</p>
+          <div class="copy-area" id="yongma-2">[캔델라코리아] 수거 요청
+
+▶ 병원: {병원명}
+▶ 주소: {상세주소}
+▶ 연락처: {연락처}
+▶ 박스: {박스수량}박스
+▶ 특이: {특이사항}
+▶ 접수: {접수번호}
+
+수거 후 캔델라코리아 입고
+02-0000-0000</div>
+          <button class="copy-btn" onclick="copyText('yongma-2', this)">📋 복사하기</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  function showTab(name, el) {
+    ['sms','kakao','email','yongma'].forEach(t => {
+      document.getElementById('tab-'+t).style.display = 'none';
+    });
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    document.getElementById('tab-'+name).style.display = 'block';
+    el.classList.add('active');
+  }
+
+  function copyText(id, btn) {
+    const text = document.getElementById(id).textContent;
+    navigator.clipboard.writeText(text).then(() => {
+      btn.textContent = '✅ 복사됨!';
+      btn.classList.add('copied');
+      setTimeout(() => {
+        btn.textContent = '📋 복사하기';
+        btn.classList.remove('copied');
+      }, 2000);
+    }).catch(() => {
+      const range = document.createRange();
+      range.selectNode(document.getElementById(id));
+      window.getSelection().removeAllRanges();
+      window.getSelection().addRange(range);
+      document.execCommand('copy');
+      window.getSelection().removeAllRanges();
+      btn.textContent = '✅ 복사됨!';
+      setTimeout(() => { btn.textContent = '📋 복사하기'; }, 2000);
+    });
+  }
+</script>
+</body>
+</html>
