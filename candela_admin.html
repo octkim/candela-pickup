@@ -30,139 +30,44 @@
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body { font-family: 'Noto Sans KR', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; display: flex; }
-
-  /* 사이드바 */
-  .sidebar {
-    width: 200px;
-    background: var(--purple-deep);
-    min-height: 100vh;
-    flex-shrink: 0;
-    display: flex;
-    flex-direction: column;
-  }
-  .sidebar-logo {
-    padding: 22px 18px 18px;
-    border-bottom: 1px solid var(--purple-light);
-  }
+  .sidebar { width: 200px; background: var(--purple-deep); min-height: 100vh; flex-shrink: 0; display: flex; flex-direction: column; }
+  .sidebar-logo { padding: 22px 18px 18px; border-bottom: 1px solid var(--purple-light); }
   .logo-row { display: flex; align-items: center; gap: 7px; margin-bottom: 2px; }
   .logo-dot { width: 8px; height: 8px; background: var(--magenta); border-radius: 50%; }
   .logo-name { color: #fff; font-size: 13px; font-weight: 700; letter-spacing: 1px; }
   .logo-sub { font-size: 10px; color: rgba(255,255,255,0.4); padding-left: 15px; }
   .sidebar-menu { padding: 14px 0; flex: 1; }
   .menu-label { font-size: 9px; font-weight: 700; color: rgba(255,255,255,0.3); letter-spacing: 1px; padding: 0 18px 8px; }
-  .menu-item {
-    display: flex;
-    align-items: center;
-    gap: 9px;
-    padding: 10px 18px;
-    font-size: 12px;
-    font-weight: 500;
-    color: rgba(255,255,255,0.6);
-    cursor: pointer;
-    border-radius: 0;
-    transition: all 0.15s;
-    text-decoration: none;
-  }
+  .menu-item { display: flex; align-items: center; gap: 9px; padding: 10px 18px; font-size: 12px; font-weight: 500; color: rgba(255,255,255,0.6); cursor: pointer; transition: all 0.15s; text-decoration: none; }
   .menu-item:hover { color: #fff; background: rgba(255,255,255,0.07); }
   .menu-item.active { color: #fff; background: rgba(200,80,160,0.25); border-right: 3px solid var(--magenta); }
   .menu-icon { font-size: 15px; }
   .sidebar-footer { padding: 14px 18px; border-top: 1px solid var(--purple-light); font-size: 10px; color: rgba(255,255,255,0.3); }
-
-  /* 메인 */
   .main { flex: 1; display: flex; flex-direction: column; min-height: 100vh; }
-  .topbar {
-    background: #fff;
-    height: 52px;
-    padding: 0 24px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    border-bottom: 1px solid var(--gray-200);
-  }
+  .topbar { background: #fff; height: 52px; padding: 0 24px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid var(--gray-200); }
   .topbar-title { font-size: 14px; font-weight: 700; color: var(--text); }
   .topbar-right { display: flex; align-items: center; gap: 12px; }
   .admin-badge { background: var(--purple-deep); color: #fff; font-size: 10px; font-weight: 700; padding: 3px 10px; border-radius: 20px; letter-spacing: 0.5px; }
-  .refresh-btn {
-    background: none;
-    border: 1px solid var(--gray-200);
-    border-radius: 7px;
-    padding: 6px 12px;
-    font-size: 11px;
-    font-weight: 700;
-    color: var(--gray-600);
-    cursor: pointer;
-    font-family: 'Noto Sans KR', sans-serif;
-    display: flex;
-    align-items: center;
-    gap: 5px;
-    transition: all 0.15s;
-  }
+  .refresh-btn { background: none; border: 1px solid var(--gray-200); border-radius: 7px; padding: 6px 12px; font-size: 11px; font-weight: 700; color: var(--gray-600); cursor: pointer; font-family: 'Noto Sans KR', sans-serif; display: flex; align-items: center; gap: 5px; transition: all 0.15s; }
   .refresh-btn:hover { border-color: var(--magenta); color: var(--magenta); }
-
   .content { padding: 24px; flex: 1; }
-
-  /* 통계 카드 */
   .stat-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 24px; }
-  .stat-card {
-    background: #fff;
-    border-radius: var(--radius);
-    border: 1px solid var(--gray-200);
-    padding: 16px 18px;
-  }
+  .stat-card { background: #fff; border-radius: var(--radius); border: 1px solid var(--gray-200); padding: 16px 18px; }
   .stat-label { font-size: 11px; font-weight: 700; color: var(--gray-600); letter-spacing: 0.3px; margin-bottom: 6px; }
   .stat-val { font-size: 26px; font-weight: 700; color: var(--text); }
   .stat-sub { font-size: 11px; color: var(--gray-400); margin-top: 2px; }
   .stat-accent { color: var(--magenta); }
-
-  /* 필터 바 */
-  .filter-bar {
-    background: #fff;
-    border-radius: var(--radius);
-    border: 1px solid var(--gray-200);
-    padding: 14px 18px;
-    margin-bottom: 16px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    flex-wrap: wrap;
-  }
-  .filter-bar input, .filter-bar select {
-    border: 1px solid var(--gray-200);
-    border-radius: 7px;
-    padding: 7px 11px;
-    font-size: 12px;
-    font-family: 'Noto Sans KR', sans-serif;
-    color: var(--text);
-    outline: none;
-    transition: border-color 0.15s;
-  }
+  .filter-bar { background: #fff; border-radius: var(--radius); border: 1px solid var(--gray-200); padding: 14px 18px; margin-bottom: 16px; display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+  .filter-bar input, .filter-bar select { border: 1px solid var(--gray-200); border-radius: 7px; padding: 7px 11px; font-size: 12px; font-family: 'Noto Sans KR', sans-serif; color: var(--text); outline: none; transition: border-color 0.15s; }
   .filter-bar input { min-width: 180px; }
   .filter-bar input:focus, .filter-bar select:focus { border-color: var(--magenta); }
   .filter-label { font-size: 11px; font-weight: 700; color: var(--gray-600); white-space: nowrap; }
-
-  /* 테이블 */
   .table-card { background: #fff; border-radius: var(--radius); border: 1px solid var(--gray-200); overflow: hidden; }
-  .table-header {
-    padding: 14px 18px;
-    border-bottom: 1px solid var(--gray-200);
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
+  .table-header { padding: 14px 18px; border-bottom: 1px solid var(--gray-200); display: flex; align-items: center; justify-content: space-between; }
   .table-header h3 { font-size: 13px; font-weight: 700; }
   .table-count { font-size: 11px; color: var(--gray-600); }
   table { width: 100%; border-collapse: collapse; }
-  thead th {
-    background: var(--bg);
-    padding: 10px 14px;
-    text-align: left;
-    font-size: 11px;
-    font-weight: 700;
-    color: var(--gray-600);
-    letter-spacing: 0.3px;
-    border-bottom: 1px solid var(--gray-200);
-    white-space: nowrap;
-  }
+  thead th { background: var(--bg); padding: 10px 14px; text-align: left; font-size: 11px; font-weight: 700; color: var(--gray-600); letter-spacing: 0.3px; border-bottom: 1px solid var(--gray-200); white-space: nowrap; }
   tbody tr { border-bottom: 1px solid var(--gray-200); transition: background 0.1s; }
   tbody tr:last-child { border-bottom: none; }
   tbody tr:hover { background: #fdf9ff; }
@@ -174,83 +79,22 @@
   .td-boxes { font-weight: 700; text-align: center; }
   .td-promo { font-size: 11px; color: var(--magenta); font-weight: 700; text-align: center; }
   .td-note { font-size: 11px; color: var(--gray-600); max-width: 140px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-
-  /* 상태 배지 */
-  .status-badge {
-    display: inline-block;
-    padding: 3px 9px;
-    border-radius: 20px;
-    font-size: 10px;
-    font-weight: 700;
-    letter-spacing: 0.3px;
-    white-space: nowrap;
-  }
+  .status-badge { display: inline-block; padding: 3px 9px; border-radius: 20px; font-size: 10px; font-weight: 700; letter-spacing: 0.3px; white-space: nowrap; }
   .s-new { background: var(--status-new); color: var(--status-new-text); }
   .s-scheduled { background: var(--status-scheduled); color: var(--status-scheduled-text); }
   .s-done { background: var(--status-done); color: var(--status-done-text); }
   .s-cancel { background: var(--status-cancel); color: var(--status-cancel-text); }
-
-  /* 상태 변경 셀렉트 */
-  .status-select {
-    border: 1px solid var(--gray-200);
-    border-radius: 6px;
-    padding: 4px 7px;
-    font-size: 11px;
-    font-family: 'Noto Sans KR', sans-serif;
-    color: var(--text);
-    background: #fff;
-    cursor: pointer;
-    outline: none;
-  }
+  .status-select { border: 1px solid var(--gray-200); border-radius: 6px; padding: 4px 7px; font-size: 11px; font-family: 'Noto Sans KR', sans-serif; color: var(--text); background: #fff; cursor: pointer; outline: none; }
   .status-select:focus { border-color: var(--magenta); }
-
-  /* 액션 버튼 */
-  .action-btn {
-    background: none;
-    border: 1px solid var(--gray-200);
-    border-radius: 6px;
-    padding: 4px 9px;
-    font-size: 10px;
-    font-weight: 700;
-    color: var(--gray-600);
-    cursor: pointer;
-    font-family: 'Noto Sans KR', sans-serif;
-    transition: all 0.15s;
-    margin-left: 4px;
-  }
+  .action-btn { background: none; border: 1px solid var(--gray-200); border-radius: 6px; padding: 4px 9px; font-size: 10px; font-weight: 700; color: var(--gray-600); cursor: pointer; font-family: 'Noto Sans KR', sans-serif; transition: all 0.15s; margin-left: 4px; }
   .action-btn:hover { border-color: var(--purple-deep); color: var(--purple-deep); }
   .action-btn.call { border-color: #1a7a4a; color: #1a7a4a; }
   .action-btn.call:hover { background: #eaf3de; }
-
-  /* 빈 상태 */
   .empty-state { text-align: center; padding: 48px; color: var(--gray-400); font-size: 13px; }
-
-  /* 모달 */
-  .modal-backdrop {
-    display: none;
-    position: fixed;
-    inset: 0;
-    background: rgba(45,10,62,0.5);
-    z-index: 100;
-    align-items: center;
-    justify-content: center;
-  }
+  .modal-backdrop { display: none; position: fixed; inset: 0; background: rgba(45,10,62,0.5); z-index: 100; align-items: center; justify-content: center; }
   .modal-backdrop.show { display: flex; }
-  .modal {
-    background: #fff;
-    border-radius: var(--radius);
-    width: 480px;
-    max-width: 90vw;
-    padding: 0;
-    overflow: hidden;
-  }
-  .modal-header {
-    background: var(--purple-deep);
-    padding: 16px 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
+  .modal { background: #fff; border-radius: var(--radius); width: 480px; max-width: 90vw; padding: 0; overflow: hidden; }
+  .modal-header { background: var(--purple-deep); padding: 16px 20px; display: flex; justify-content: space-between; align-items: center; }
   .modal-header h3 { font-size: 14px; font-weight: 700; color: #fff; }
   .modal-close { background: none; border: none; color: rgba(255,255,255,0.6); font-size: 18px; cursor: pointer; padding: 0; line-height: 1; }
   .modal-body { padding: 20px; }
@@ -258,65 +102,32 @@
   .detail-row:last-child { border-bottom: none; }
   .detail-key { font-weight: 700; color: var(--gray-600); min-width: 100px; flex-shrink: 0; }
   .detail-val { color: var(--text); }
-
-  /* 엑셀 export 버튼 */
-  .export-btn {
-    background: #1a7a4a;
-    color: #fff;
-    border: none;
-    border-radius: 7px;
-    padding: 7px 14px;
-    font-size: 11px;
-    font-weight: 700;
-    cursor: pointer;
-    font-family: 'Noto Sans KR', sans-serif;
-    display: flex;
-    align-items: center;
-    gap: 5px;
-    transition: opacity 0.15s;
-  }
+  .export-btn { background: #1a7a4a; color: #fff; border: none; border-radius: 7px; padding: 7px 14px; font-size: 11px; font-weight: 700; cursor: pointer; font-family: 'Noto Sans KR', sans-serif; display: flex; align-items: center; gap: 5px; transition: opacity 0.15s; }
   .export-btn:hover { opacity: 0.85; }
-
-  @media (max-width: 768px) {
-    .sidebar { display: none; }
-    .stat-grid { grid-template-columns: repeat(2, 1fr); }
-  }
+  .sms-btn { width: 100%; padding: 12px; background: var(--purple-deep); color: #fff; border: none; border-radius: 8px; font-size: 13px; font-weight: 700; cursor: pointer; font-family: 'Noto Sans KR', sans-serif; margin-top: 4px; transition: opacity 0.15s; }
+  .sms-btn:hover { opacity: 0.85; }
+  @media (max-width: 768px) { .sidebar { display: none; } .stat-grid { grid-template-columns: repeat(2, 1fr); } }
 </style>
 </head>
 <body>
 
-<!-- 사이드바 -->
 <aside class="sidebar">
   <div class="sidebar-logo">
-    <div class="logo-row">
-      <div class="logo-dot"></div>
-      <span class="logo-name">CANDELA</span>
-    </div>
+    <div class="logo-row"><div class="logo-dot"></div><span class="logo-name">CANDELA</span></div>
     <div class="logo-sub">KOREA ADMIN</div>
   </div>
   <nav class="sidebar-menu">
     <div class="menu-label">메뉴</div>
-    <a class="menu-item active" href="#">
-      <span class="menu-icon">📋</span> 공병 회수 접수
-    </a>
-    <a class="menu-item" href="#">
-      <span class="menu-icon">📊</span> 통계
-    </a>
-    <a class="menu-item" href="#">
-      <span class="menu-icon">🏥</span> 병원 관리
-    </a>
-    <a class="menu-item" href="#">
-      <span class="menu-icon">🚚</span> 배차 현황
-    </a>
+    <a class="menu-item active" href="#"><span class="menu-icon">📋</span> 공병 회수 접수</a>
+    <a class="menu-item" href="#"><span class="menu-icon">📊</span> 통계</a>
+    <a class="menu-item" href="#"><span class="menu-icon">🏥</span> 병원 관리</a>
+    <a class="menu-item" href="#"><span class="menu-icon">🚚</span> 배차 현황</a>
     <div class="menu-label" style="margin-top:14px">설정</div>
-    <a class="menu-item" href="#">
-      <span class="menu-icon">⚙️</span> 환경설정
-    </a>
+    <a class="menu-item" href="#"><span class="menu-icon">⚙️</span> 환경설정</a>
   </nav>
   <div class="sidebar-footer">CANDELA KOREA v1.0</div>
 </aside>
 
-<!-- 메인 콘텐츠 -->
 <div class="main">
   <div class="topbar">
     <span class="topbar-title">DCD 공병 회수 접수 관리</span>
@@ -327,32 +138,13 @@
   </div>
 
   <div class="content">
-
-    <!-- 통계 카드 -->
     <div class="stat-grid">
-      <div class="stat-card">
-        <div class="stat-label">전체 접수</div>
-        <div class="stat-val" id="statTotal">0</div>
-        <div class="stat-sub">건</div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-label">처리 대기</div>
-        <div class="stat-val stat-accent" id="statPending">0</div>
-        <div class="stat-sub">접수완료 상태</div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-label">총 회수 박스</div>
-        <div class="stat-val" id="statBoxes">0</div>
-        <div class="stat-sub">박스</div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-label">증정 예정 캔</div>
-        <div class="stat-val stat-accent" id="statCans">0</div>
-        <div class="stat-sub">캔</div>
-      </div>
+      <div class="stat-card"><div class="stat-label">전체 접수</div><div class="stat-val" id="statTotal">0</div><div class="stat-sub">건</div></div>
+      <div class="stat-card"><div class="stat-label">처리 대기</div><div class="stat-val stat-accent" id="statPending">0</div><div class="stat-sub">접수완료 상태</div></div>
+      <div class="stat-card"><div class="stat-label">총 회수 박스</div><div class="stat-val" id="statBoxes">0</div><div class="stat-sub">박스</div></div>
+      <div class="stat-card"><div class="stat-label">증정 예정 캔</div><div class="stat-val stat-accent" id="statCans">0</div><div class="stat-sub">캔</div></div>
     </div>
 
-    <!-- 필터 -->
     <div class="filter-bar">
       <span class="filter-label">검색</span>
       <input type="text" id="searchInput" placeholder="병원명, 접수번호 검색..." oninput="renderTable()" />
@@ -373,7 +165,6 @@
       <button class="export-btn" onclick="exportCSV()">📥 CSV 다운로드</button>
     </div>
 
-    <!-- 테이블 -->
     <div class="table-card">
       <div class="table-header">
         <h3>접수 목록</h3>
@@ -383,16 +174,8 @@
         <table>
           <thead>
             <tr>
-              <th>접수번호</th>
-              <th>접수일시</th>
-              <th>병원명</th>
-              <th>연락처</th>
-              <th>지역</th>
-              <th>박스</th>
-              <th>증정</th>
-              <th>특이사항</th>
-              <th>상태</th>
-              <th>액션</th>
+              <th>접수번호</th><th>접수일시</th><th>병원명</th><th>연락처</th>
+              <th>지역</th><th>박스</th><th>증정</th><th>특이사항</th><th>상태</th><th>액션</th>
             </tr>
           </thead>
           <tbody id="tableBody"></tbody>
@@ -402,7 +185,6 @@
   </div>
 </div>
 
-<!-- 상세 모달 -->
 <div class="modal-backdrop" id="modal">
   <div class="modal">
     <div class="modal-header">
@@ -414,13 +196,8 @@
 </div>
 
 <script>
-  // =============================================
-  // 구글 시트 연동 설정
-  // Apps Script 배포 후 아래 URL을 교체하세요
-  // =============================================
-  const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/YOUR_SCRIPT_ID/exec';
+  const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwa_yGGI4MoTtLWMMoDOYZKOSR0TEWADo_BBus6Q5hc7_nxswDdLiKMaNyxJHr01QM-cA/exec';
 
-  // 데모 데이터 (구글 시트 연동 전 테스트용)
   let allData = [
     { 접수번호:'CDL-240115-1234', 접수일시:'2024-01-15 09:23', 병원명:'강남성형외과', 연락처:'010-1234-5678', 지역:'서울', 상세주소:'강남구 테헤란로 123', 박스수량:3, 증정캔수량:3, 특이사항:'오전 10시 이후 방문 요청', 상태:'접수완료' },
     { 접수번호:'CDL-240115-5678', 접수일시:'2024-01-15 10:41', 병원명:'부산피부과의원', 연락처:'010-9876-5432', 지역:'부산', 상세주소:'해운대구 마린시티로 55', 박스수량:1, 증정캔수량:1, 특이사항:'', 상태:'배차완료' },
@@ -468,7 +245,7 @@
       return;
     }
 
-    tbody.innerHTML = filtered.map((d, i) => `
+    tbody.innerHTML = filtered.map((d) => `
       <tr>
         <td class="td-ref">${d.접수번호}</td>
         <td style="font-size:11px;color:var(--gray-600)">${d.접수일시}</td>
@@ -498,8 +275,6 @@
     allData[idx].상태 = newStatus;
     updateStats();
     renderTable();
-    // 구글 시트에도 업데이트 전송 (실제 운영 시 활성화)
-    // updateGoogleSheet(allData[idx]);
   }
 
   function showDetail(idx) {
@@ -516,12 +291,33 @@
       <div class="detail-row"><div class="detail-key">증정 캔 수량</div><div class="detail-val" style="color:var(--magenta);font-weight:700">DCD ${d.증정캔수량}캔</div></div>
       <div class="detail-row"><div class="detail-key">특이사항</div><div class="detail-val">${d.특이사항 || '없음'}</div></div>
       <div class="detail-row"><div class="detail-key">상태</div><div class="detail-val"><span class="status-badge ${statusClass(d.상태)}">${d.상태}</span></div></div>
+      <div style="margin-top:16px;padding-top:14px;border-top:1px solid #ede8f2">
+        <button class="sms-btn" onclick="send수거완료문자('${d.병원명}','${d.연락처}','${d.증정캔수량}')">
+          📱 수거완료 문자 발송하기
+        </button>
+      </div>
     `;
     document.getElementById('modal').classList.add('show');
   }
 
   function closeModal() {
     document.getElementById('modal').classList.remove('show');
+  }
+
+  async function send수거완료문자(병원명, 연락처, 증정캔수량) {
+    const 운송장 = prompt('운송장번호를 입력하세요:');
+    if (!운송장) return;
+    await fetch(GOOGLE_SCRIPT_URL, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        action: 'sendSMS',
+        병원명, 연락처, 증정캔수량, 운송장번호: 운송장
+      })
+    });
+    alert('✅ 수거완료 문자가 발송되었습니다!');
+    closeModal();
   }
 
   function exportCSV() {
@@ -536,25 +332,13 @@
   }
 
   async function loadData() {
-    // 구글 시트에서 데이터 로드 (실제 운영 시 활성화)
-    // try {
-    //   const res = await fetch(GOOGLE_SCRIPT_URL + '?action=getAll');
-    //   const json = await res.json();
-    //   allData = json.data;
-    //   updateStats();
-    //   renderTable();
-    // } catch(e) { console.error(e); }
-
-    // 데모: 새로고침 알림
     alert('구글 시트 연동 후 실시간 데이터를 불러옵니다.\n(현재 데모 데이터 표시 중)');
   }
 
-  // 모달 바깥 클릭 시 닫기
   document.getElementById('modal').addEventListener('click', function(e) {
     if (e.target === this) closeModal();
   });
 
-  // 초기 렌더
   updateStats();
   renderTable();
 </script>
