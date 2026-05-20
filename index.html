@@ -3,360 +3,299 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>DCD 공병 회수 접수 | CANDELA KOREA</title>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+<title>DCD 공병 회수 신청 | Candela Medical Korea</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500&family=DM+Serif+Display&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --purple-deep: #2D0A3E;
-    --purple-mid: #3D0D52;
-    --purple-light: #5a1a7a;
-    --magenta: #C850A0;
-    --magenta-light: #e890c8;
-    --magenta-pale: rgba(200,80,160,0.12);
-    --white: #fff;
-    --gray-100: #f7f4f9;
-    --gray-200: #ede8f2;
-    --gray-400: #b0a0bc;
-    --gray-600: #6b5c7a;
-    --text: #1a0a24;
-    --radius: 10px;
-  }
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  body {
-    font-family: 'Noto Sans KR', sans-serif;
-    background: var(--gray-100);
-    min-height: 100vh;
-    color: var(--text);
-  }
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --ink: #0f0a14;
+  --ink-soft: #4a3f56;
+  --ink-muted: #9a8fa8;
+  --line: #e8e2f0;
+  --surface: #faf8fc;
+  --white: #ffffff;
+  --violet: #6B46C1;
+  --violet-light: #f3effe;
+  --violet-mid: #ddd6fe;
+  --magenta: #C850A0;
+  --error: #dc2626;
+  --error-bg: #fff5f5;
+  --error-border: #fca5a5;
+  --green: #059669;
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 20px;
+  --shadow: 0 1px 3px rgba(15,10,20,0.06), 0 4px 16px rgba(15,10,20,0.04);
+}
+html { font-size: 16px; -webkit-font-smoothing: antialiased; }
+body { font-family: 'DM Sans', sans-serif; background: var(--surface); color: var(--ink); min-height: 100vh; }
 
-  /* 상단 네비 */
-  .topnav {
-    background: var(--purple-deep);
-    padding: 0 32px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    height: 52px;
-  }
-  .nav-logo {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    text-decoration: none;
-  }
-  .nav-dot { width: 9px; height: 9px; background: var(--magenta); border-radius: 50%; }
-  .nav-name { color: #fff; font-size: 15px; font-weight: 700; letter-spacing: 1.5px; }
-  .nav-right { font-size: 11px; color: rgba(255,255,255,0.45); letter-spacing: 0.5px; }
+/* NAV */
+nav {
+  position: sticky; top: 0; z-index: 50;
+  background: rgba(255,255,255,0.92);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--line);
+  padding: 0 40px; height: 60px;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+.nav-logo-mark {
+  width: 28px; height: 28px; background: var(--ink);
+  border-radius: 8px; display: flex; align-items: center; justify-content: center;
+}
+.nav-logo-mark span { color: #fff; font-size: 11px; font-weight: 500; letter-spacing: 0.5px; }
+.nav-brand { font-size: 13px; font-weight: 500; color: var(--ink); letter-spacing: 0.3px; }
+.nav-brand small { display: block; font-size: 10px; font-weight: 300; color: var(--ink-muted); letter-spacing: 0.5px; }
+.nav-pill { background: var(--violet-light); color: var(--violet); font-size: 11px; font-weight: 500; padding: 5px 12px; border-radius: 20px; letter-spacing: 0.3px; }
 
-  /* 히어로 */
-  .hero {
-    background: var(--purple-mid);
-    padding: 36px 32px 28px;
-    border-bottom: 1px solid var(--purple-light);
-  }
-  .hero-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    background: var(--magenta-pale);
-    border: 1px solid rgba(200,80,160,0.35);
-    border-radius: 20px;
-    padding: 4px 13px;
-    font-size: 10px;
-    color: var(--magenta-light);
-    letter-spacing: 1px;
-    font-weight: 500;
-    margin-bottom: 14px;
-  }
-  .hero h1 { font-size: 22px; font-weight: 700; color: #fff; margin-bottom: 6px; }
-  .hero p { font-size: 13px; color: rgba(255,255,255,0.6); line-height: 1.7; }
+/* HERO */
+.hero { max-width: 600px; margin: 0 auto; padding: 56px 24px 40px; text-align: center; }
+.hero-eyebrow {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 11px; font-weight: 500; color: var(--violet);
+  letter-spacing: 1.2px; text-transform: uppercase; margin-bottom: 16px;
+}
+.hero-eyebrow::before, .hero-eyebrow::after {
+  content: ''; width: 24px; height: 1px; background: var(--violet-mid);
+}
+.hero h1 {
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(26px, 4vw, 36px); font-weight: 400;
+  color: var(--ink); line-height: 1.25; margin-bottom: 12px; letter-spacing: -0.3px;
+}
+.hero p { font-size: 15px; color: var(--ink-soft); line-height: 1.7; font-weight: 300; }
 
-  /* 프로모션 배너 */
-  .promo-bar {
-    background: var(--magenta);
-    padding: 11px 32px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
-  .promo-icon { font-size: 16px; }
-  .promo-bar p { font-size: 12px; color: #fff; line-height: 1.5; }
-  .promo-bar strong { font-weight: 700; }
+/* PROMO */
+.promo-card { max-width: 600px; margin: 0 auto 32px; padding: 0 24px; }
+.promo-inner {
+  background: linear-gradient(135deg, #1a0a2e 0%, #2D0A3E 100%);
+  border-radius: var(--radius-lg); padding: 20px 24px;
+  display: flex; align-items: center; gap: 16px;
+}
+.promo-icon-wrap {
+  width: 40px; height: 40px; background: rgba(200,80,160,0.2);
+  border-radius: 10px; display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0; font-size: 18px;
+}
+.promo-text { flex: 1; }
+.promo-text strong { display: block; font-size: 13px; font-weight: 500; color: #fff; margin-bottom: 3px; }
+.promo-text span { font-size: 12px; color: rgba(255,255,255,0.55); font-weight: 300; line-height: 1.5; }
+.promo-badge { background: var(--magenta); color: #fff; font-size: 11px; font-weight: 500; padding: 4px 10px; border-radius: 20px; white-space: nowrap; flex-shrink: 0; }
 
-  /* 메인 컨테이너 */
-  .container {
-    max-width: 680px;
-    margin: 32px auto;
-    padding: 0 16px 40px;
-  }
+/* FORM */
+.form-wrap { max-width: 600px; margin: 0 auto; padding: 0 24px 60px; }
+.form-card { background: var(--white); border-radius: var(--radius-lg); border: 1px solid var(--line); box-shadow: var(--shadow); overflow: hidden; }
+.section-head {
+  padding: 20px 28px 16px; display: flex; align-items: center; gap: 10px;
+  border-bottom: 1px solid var(--line);
+}
+.section-num {
+  width: 22px; height: 22px; background: var(--ink); border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 11px; font-weight: 500; color: #fff; flex-shrink: 0;
+}
+.section-head h2 { font-size: 13px; font-weight: 500; color: var(--ink); letter-spacing: 0.2px; }
+.fields { padding: 20px 28px 24px; }
+.fields + .section-head { border-top: 1px solid var(--line); }
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.full { grid-column: 1 / -1; }
 
-  /* 폼 카드 */
-  .form-card {
-    background: #fff;
-    border-radius: var(--radius);
-    border: 1px solid var(--gray-200);
-    overflow: hidden;
-  }
-  .form-card-header {
-    padding: 18px 24px;
-    border-bottom: 1px solid var(--gray-200);
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-  .form-card-header .step-badge {
-    width: 22px;
-    height: 22px;
-    background: var(--purple-deep);
-    color: #fff;
-    border-radius: 50%;
-    font-size: 11px;
-    font-weight: 700;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-  }
-  .form-card-header h2 { font-size: 14px; font-weight: 700; color: var(--text); }
-  .form-card-body { padding: 22px 24px; }
+/* FIELD + 인라인 에러 */
+.field { display: flex; flex-direction: column; gap: 6px; }
+label {
+  font-size: 12px; font-weight: 500; color: var(--ink-muted);
+  letter-spacing: 0.4px; text-transform: uppercase;
+}
+.req { color: var(--magenta); }
+.err-msg {
+  display: none; font-size: 12px; color: var(--error);
+  font-weight: 400; margin-top: 2px;
+}
+.field.has-error .err-msg { display: block; }
+.field.has-error input,
+.field.has-error select,
+.field.has-error textarea {
+  border-color: var(--error-border);
+  background: var(--error-bg);
+}
+.field.has-error input:focus,
+.field.has-error select:focus,
+.field.has-error textarea:focus {
+  border-color: var(--error);
+  box-shadow: 0 0 0 3px rgba(220,38,38,0.08);
+}
 
-  /* 폼 그리드 */
-  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
-  .full { grid-column: 1 / -1; }
-  .field { display: flex; flex-direction: column; gap: 5px; }
-  .field label {
-    font-size: 12px;
-    font-weight: 700;
-    color: var(--gray-600);
-    letter-spacing: 0.3px;
-    display: flex;
-    align-items: center;
-    gap: 4px;
-  }
-  .req { color: var(--magenta); }
-  .field input,
-  .field select,
-  .field textarea {
-    border: 1px solid var(--gray-200);
-    border-radius: 8px;
-    padding: 10px 13px;
-    font-size: 13px;
-    font-family: 'Noto Sans KR', sans-serif;
-    color: var(--text);
-    background: #fff;
-    outline: none;
-    transition: border-color 0.2s, box-shadow 0.2s;
-    width: 100%;
-  }
-  .field input:focus,
-  .field select:focus,
-  .field textarea:focus {
-    border-color: var(--magenta);
-    box-shadow: 0 0 0 3px rgba(200,80,160,0.1);
-  }
-  .field textarea { resize: vertical; min-height: 80px; line-height: 1.6; }
+input[type="text"], input[type="tel"], select, textarea {
+  width: 100%; border: 1px solid var(--line); border-radius: var(--radius-sm);
+  padding: 11px 14px; font-size: 14px; font-family: 'DM Sans', sans-serif;
+  font-weight: 400; color: var(--ink); background: var(--white);
+  outline: none; transition: border-color 0.15s, box-shadow 0.15s, background 0.15s;
+  -webkit-appearance: none;
+}
+input:focus, select:focus, textarea:focus {
+  border-color: var(--violet); box-shadow: 0 0 0 3px rgba(107,70,193,0.08);
+}
+input::placeholder, textarea::placeholder { color: var(--ink-muted); font-weight: 300; }
+select {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%239a8fa8' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat; background-position: right 14px center;
+  padding-right: 36px; cursor: pointer;
+}
+textarea { resize: vertical; min-height: 76px; line-height: 1.6; }
 
-  /* 박스 수량 스텝퍼 */
-  .stepper-wrap { display: flex; align-items: center; gap: 10px; }
-  .stepper-btn {
-    width: 34px;
-    height: 34px;
-    border: 1px solid var(--gray-200);
-    border-radius: 8px;
-    background: var(--gray-100);
-    color: var(--text);
-    font-size: 18px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.15s;
-    flex-shrink: 0;
-    line-height: 1;
-  }
-  .stepper-btn:hover { border-color: var(--magenta); color: var(--magenta); background: var(--magenta-pale); }
-  .stepper-val { font-size: 22px; font-weight: 700; min-width: 36px; text-align: center; color: var(--purple-deep); }
-  .stepper-unit { font-size: 13px; color: var(--gray-600); }
+/* STEPPER */
+.stepper-row { display: flex; align-items: center; gap: 0; }
+.stepper-btn {
+  width: 38px; height: 38px; border: 1px solid var(--line); background: var(--surface);
+  color: var(--ink); font-size: 18px; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: all 0.15s; flex-shrink: 0; line-height: 1; font-family: 'DM Sans', sans-serif;
+}
+.stepper-btn:first-child { border-radius: var(--radius-sm) 0 0 var(--radius-sm); }
+.stepper-btn:last-child { border-radius: 0 var(--radius-sm) var(--radius-sm) 0; }
+.stepper-btn:hover { background: var(--violet-light); border-color: var(--violet-mid); color: var(--violet); }
+.stepper-val-wrap {
+  flex: 1; height: 38px;
+  border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);
+  display: flex; align-items: center; justify-content: center; gap: 6px; background: #fff;
+}
+.stepper-val { font-size: 18px; font-weight: 500; color: var(--ink); }
+.stepper-unit { font-size: 13px; color: var(--ink-muted); font-weight: 300; }
+.calc-bar {
+  display: flex; align-items: center; justify-content: space-between;
+  background: var(--violet-light); border: 1px solid var(--violet-mid);
+  border-radius: var(--radius-sm); padding: 10px 14px; margin-top: 10px;
+}
+.calc-label { font-size: 12px; color: var(--violet); font-weight: 400; }
+.calc-val { font-size: 13px; font-weight: 500; color: var(--violet); }
 
-  /* 프로모션 계산 바 */
-  .calc-bar {
-    background: #f3effe;
-    border: 1px solid #d4c8f5;
-    border-radius: 8px;
-    padding: 11px 16px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: 10px;
-  }
-  .calc-label { font-size: 12px; color: #4a3890; }
-  .calc-val { font-size: 13px; font-weight: 700; color: #3C3489; }
+/* CONSENT */
+.consent-box {
+  background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-sm);
+  padding: 14px; font-size: 12px; color: var(--ink-soft); line-height: 1.7; font-weight: 300;
+}
+.consent-check {
+  display: flex; align-items: center; gap: 10px; margin-top: 12px;
+  cursor: pointer; font-size: 13px; font-weight: 400; color: var(--ink);
+}
+.consent-check input[type="checkbox"] { width: 16px; height: 16px; accent-color: var(--violet); cursor: pointer; flex-shrink: 0; }
+.consent-err { display: none; font-size: 12px; color: var(--error); margin-top: 6px; }
+.consent-err.show { display: block; }
 
-  /* 개인정보 동의 */
-  .consent-box {
-    background: var(--gray-100);
-    border: 1px solid var(--gray-200);
-    border-radius: 8px;
-    padding: 14px 16px;
-    font-size: 12px;
-    color: var(--gray-600);
-    line-height: 1.7;
-  }
-  .consent-check {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    margin-top: 10px;
-    font-size: 12px;
-    font-weight: 700;
-    color: var(--text);
-    cursor: pointer;
-  }
-  .consent-check input[type="checkbox"] { accent-color: var(--magenta); width: 15px; height: 15px; cursor: pointer; }
+/* SUBMIT */
+.submit-wrap { padding: 0 28px 28px; }
+.submit-btn {
+  width: 100%; padding: 15px; background: var(--ink); color: #fff; border: none;
+  border-radius: var(--radius-md); font-size: 14px; font-weight: 500;
+  font-family: 'DM Sans', sans-serif; cursor: pointer; letter-spacing: 0.3px;
+  transition: all 0.2s; display: flex; align-items: center; justify-content: center; gap: 8px;
+}
+.submit-btn:hover { background: #1e1128; transform: translateY(-1px); box-shadow: 0 4px 16px rgba(15,10,20,0.15); }
+.submit-btn:active { transform: translateY(0); }
+.submit-btn:disabled { background: var(--ink-muted); cursor: not-allowed; transform: none; box-shadow: none; }
 
-  /* 제출 버튼 */
-  .submit-btn {
-    width: 100%;
-    padding: 15px;
-    background: var(--purple-deep);
-    color: #fff;
-    border: none;
-    border-radius: var(--radius);
-    font-size: 15px;
-    font-weight: 700;
-    font-family: 'Noto Sans KR', sans-serif;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    letter-spacing: 0.5px;
-    transition: background 0.2s;
-    margin-top: 16px;
-  }
-  .submit-btn:hover { background: var(--purple-mid); }
-  .submit-btn:disabled { background: var(--gray-400); cursor: not-allowed; }
+/* SUCCESS */
+.success-screen { display: none; padding: 48px 28px; text-align: center; }
+.success-circle {
+  width: 60px; height: 60px; background: #ecfdf5; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; font-size: 26px;
+}
+.success-screen h2 { font-family: 'DM Serif Display', serif; font-size: 22px; font-weight: 400; color: var(--ink); margin-bottom: 10px; }
+.success-screen p { font-size: 14px; color: var(--ink-soft); line-height: 1.7; font-weight: 300; }
+.success-ref { display: inline-block; margin-top: 16px; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-sm); padding: 8px 20px; font-size: 13px; font-weight: 500; color: var(--violet); }
 
-  /* 완료 화면 */
-  .success-screen {
-    display: none;
-    text-align: center;
-    padding: 48px 24px;
-  }
-  .success-circle {
-    width: 64px;
-    height: 64px;
-    background: #eaf3de;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 0 auto 20px;
-    font-size: 28px;
-  }
-  .success-screen h2 { font-size: 20px; font-weight: 700; color: var(--text); margin-bottom: 8px; }
-  .success-screen p { font-size: 13px; color: var(--gray-600); line-height: 1.8; }
-  .success-ref { display: inline-block; margin-top: 14px; background: var(--gray-100); border: 1px solid var(--gray-200); border-radius: 8px; padding: 8px 20px; font-size: 13px; font-weight: 700; color: var(--purple-deep); }
+/* FLOW */
+.flow-wrap { max-width: 600px; margin: 0 auto 48px; padding: 0 24px; }
+.flow-steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2px; background: var(--line); border-radius: var(--radius-md); overflow: hidden; }
+.flow-step { background: var(--white); padding: 16px 12px; text-align: center; }
+.flow-emoji { font-size: 20px; margin-bottom: 6px; }
+.flow-lbl { font-size: 11px; color: var(--ink-soft); line-height: 1.5; font-weight: 300; }
 
-  /* 흐름도 */
-  .flow-wrap { margin-top: 28px; }
-  .flow-title { font-size: 11px; font-weight: 700; color: var(--gray-600); letter-spacing: 0.5px; margin-bottom: 14px; }
-  .flow-steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; }
-  .flow-step { text-align: center; }
-  .flow-circle {
-    width: 34px; height: 34px;
-    border-radius: 50%;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 14px; font-weight: 700;
-    margin: 0 auto 6px;
-  }
-  .fc-1 { background: #EEEDFE; color: #3C3489; }
-  .fc-2 { background: #fbeaf0; color: #72243E; }
-  .fc-3 { background: #FAEEDA; color: #633806; }
-  .fc-4 { background: #EAF3DE; color: #27500A; }
-  .flow-lbl { font-size: 11px; color: var(--gray-600); line-height: 1.5; }
+/* OVERLAY */
+.overlay { display: none; position: fixed; inset: 0; background: rgba(15,10,20,0.5); z-index: 200; align-items: center; justify-content: center; flex-direction: column; gap: 14px; }
+.overlay.show { display: flex; }
+.spinner { width: 32px; height: 32px; border: 2.5px solid rgba(255,255,255,0.2); border-top-color: #fff; border-radius: 50%; animation: spin 0.7s linear infinite; }
+.overlay p { color: #fff; font-size: 13px; font-weight: 300; }
+@keyframes spin { to { transform: rotate(360deg); } }
 
-  /* 푸터 */
-  .footer {
-    text-align: center;
-    padding: 20px;
-    font-size: 11px;
-    color: var(--gray-400);
-    letter-spacing: 0.3px;
-  }
+footer { text-align: center; padding: 24px; font-size: 11px; color: var(--ink-muted); font-weight: 300; letter-spacing: 0.3px; border-top: 1px solid var(--line); }
 
-  /* 로딩 오버레이 */
-  .loading-overlay {
-    display: none;
-    position: fixed;
-    inset: 0;
-    background: rgba(45,10,62,0.6);
-    z-index: 999;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    gap: 14px;
-  }
-  .loading-overlay.show { display: flex; }
-  .spinner {
-    width: 36px; height: 36px;
-    border: 3px solid rgba(255,255,255,0.2);
-    border-top-color: var(--magenta);
-    border-radius: 50%;
-    animation: spin 0.7s linear infinite;
-  }
-  .loading-overlay p { color: #fff; font-size: 13px; }
-  @keyframes spin { to { transform: rotate(360deg); } }
-
-  @media (max-width: 480px) {
-    .grid-2 { grid-template-columns: 1fr; }
-    .hero, .promo-bar, .topnav { padding-left: 16px; padding-right: 16px; }
-    .flow-steps { grid-template-columns: repeat(2, 1fr); }
-  }
+/* MOBILE */
+@media (max-width: 600px) {
+  nav { padding: 0 20px; }
+  .nav-brand small { display: none; }
+  .hero { padding: 36px 20px 28px; }
+  .promo-card { padding: 0 16px; }
+  .promo-inner { padding: 16px 18px; gap: 12px; }
+  .promo-badge { display: none; }
+  .form-wrap { padding: 0 16px 48px; }
+  .section-head { padding: 16px 20px 14px; }
+  .fields { padding: 16px 20px 20px; }
+  .grid-2 { grid-template-columns: 1fr; }
+  .submit-wrap { padding: 0 20px 24px; }
+  .flow-steps { grid-template-columns: repeat(2, 1fr); }
+}
 </style>
 </head>
 <body>
 
-<nav class="topnav">
-  <a class="nav-logo" href="#">
-    <div class="nav-dot"></div>
-    <span class="nav-name">CANDELA KOREA</span>
+<nav>
+  <a class="nav-logo" href="#" aria-label="Candela Medical Korea 홈">
+    <div class="nav-logo-mark"><span>C</span></div>
+    <div class="nav-brand">
+      Candela Medical Korea
+      <small>PROVIDER PORTAL</small>
+    </div>
   </a>
-  <span class="nav-right">PROVIDER PORTAL</span>
+  <span class="nav-pill">DCD 공병 회수</span>
 </nav>
 
-<div class="hero">
-  <div class="hero-badge">● EMPTY CAN RETURN PROGRAM</div>
-  <h1>DCD 공병 회수 신청</h1>
-  <p>아래 정보를 입력하시면 담당 택배사(용마로지스)가 직접 방문 수거합니다.<br>접수 후 담당자가 확인하여 수거 일정을 안내드립니다.</p>
+<section class="hero">
+  <div class="hero-eyebrow">Empty Can Return Program</div>
+  <h1>DCD 공병 회수<br>온라인 신청</h1>
+  <p>아래 정보를 입력하시면 용마로지스 택배 기사님이<br>직접 방문하여 수거해 드립니다.</p>
+</section>
+
+<div class="promo-card">
+  <div class="promo-inner">
+    <div class="promo-icon-wrap">🎁</div>
+    <div class="promo-text">
+      <strong>프로모션 혜택</strong>
+      <span>공병 15캔(1박스) 회수 시 DCD 1캔 증정.<br>박스 수량에 따라 자동 계산됩니다.</span>
+    </div>
+    <div class="promo-badge">15캔 → 1캔</div>
+  </div>
 </div>
 
-<div class="promo-bar">
-  <span class="promo-icon">🎁</span>
-  <p><strong>프로모션</strong> — 공병 15캔(1박스) 회수 시 DCD 1캔 증정. 박스 수량에 따라 자동 계산됩니다.</p>
-</div>
-
-<div class="container">
+<div class="form-wrap">
   <div class="form-card" id="formCard">
 
-    <!-- 병원 정보 -->
-    <div class="form-card-header">
-      <div class="step-badge">1</div>
+    <div class="section-head">
+      <div class="section-num">1</div>
       <h2>병원 정보</h2>
     </div>
-    <div class="form-card-body">
+    <div class="fields">
       <div class="grid-2">
-        <div class="field full">
-          <label>병원명 <span class="req">*</span></label>
-          <input type="text" id="hospitalName" placeholder="예) ○○성형외과의원" />
+
+        <div class="field full" id="f-name">
+          <label for="hospitalName">병원명 <span class="req" aria-hidden="true">*</span></label>
+          <input type="text" id="hospitalName" placeholder="○○성형외과의원"
+            aria-required="true" aria-describedby="err-name" autocomplete="organization" />
+          <span class="err-msg" id="err-name" role="alert">병원명을 입력해 주세요.</span>
         </div>
-        <div class="field">
-          <label>담당자 연락처 <span class="req">*</span></label>
-          <input type="tel" id="phone" placeholder="010-0000-0000" />
+
+        <div class="field" id="f-phone">
+          <label for="phone">담당자 연락처 <span class="req" aria-hidden="true">*</span></label>
+          <input type="tel" id="phone" placeholder="010-0000-0000"
+            aria-required="true" aria-describedby="err-phone"
+            autocomplete="tel" maxlength="13" inputmode="numeric" />
+          <span class="err-msg" id="err-phone" role="alert">올바른 연락처를 입력해 주세요.</span>
         </div>
-        <div class="field">
-          <label>지역 <span class="req">*</span></label>
-          <select id="region">
+
+        <div class="field" id="f-region">
+          <label for="region">지역 <span class="req" aria-hidden="true">*</span></label>
+          <select id="region" aria-required="true" aria-describedby="err-region">
             <option value="">시/도 선택</option>
             <option>서울</option><option>경기</option><option>인천</option>
             <option>부산</option><option>대구</option><option>광주</option>
@@ -365,116 +304,147 @@
             <option>전북</option><option>전남</option><option>경북</option>
             <option>경남</option><option>제주</option>
           </select>
+          <span class="err-msg" id="err-region" role="alert">지역을 선택해 주세요.</span>
         </div>
-        <div class="field full">
-          <label>상세 주소 <span class="req">*</span></label>
-          <input type="text" id="address" placeholder="예) 강남구 테헤란로 123, ○○빌딩 5층" />
+
+        <div class="field full" id="f-address">
+          <label for="address">상세 주소 <span class="req" aria-hidden="true">*</span></label>
+          <input type="text" id="address" placeholder="강남구 테헤란로 123, ○○빌딩 5층"
+            aria-required="true" aria-describedby="err-address" autocomplete="street-address" />
+          <span class="err-msg" id="err-address" role="alert">상세 주소를 입력해 주세요.</span>
         </div>
+
       </div>
     </div>
 
-    <!-- 회수 정보 -->
-    <div class="form-card-header" style="border-top: 1px solid #ede8f2;">
-      <div class="step-badge">2</div>
+    <div class="section-head">
+      <div class="section-num">2</div>
       <h2>회수 정보</h2>
     </div>
-    <div class="form-card-body">
+    <div class="fields">
       <div class="grid-2">
+
         <div class="field full">
-          <label>회수 박스 수량 <span class="req">*</span></label>
-          <div class="stepper-wrap">
-            <button class="stepper-btn" onclick="changeBox(-1)">−</button>
-            <span class="stepper-val" id="boxCount">1</span>
-            <span class="stepper-unit">박스</span>
-            <button class="stepper-btn" onclick="changeBox(1)">+</button>
+          <label>회수 박스 수량 <span class="req" aria-hidden="true">*</span></label>
+          <div class="stepper-row" role="group" aria-label="박스 수량 선택">
+            <button class="stepper-btn" onclick="changeBox(-1)" aria-label="수량 줄이기">−</button>
+            <div class="stepper-val-wrap">
+              <span class="stepper-val" id="boxCount" aria-live="polite">1</span>
+              <span class="stepper-unit">박스</span>
+            </div>
+            <button class="stepper-btn" onclick="changeBox(1)" aria-label="수량 늘리기">+</button>
           </div>
           <div class="calc-bar">
-            <span class="calc-label">🎁 프로모션 계산</span>
-            <span class="calc-val" id="calcText">공병 15캔 × 1박스 → 증정 DCD 1캔</span>
+            <span class="calc-label">프로모션 계산</span>
+            <span class="calc-val" id="calcText" aria-live="polite">15캔 × 1박스 → 증정 DCD 1캔</span>
           </div>
         </div>
+
         <div class="field full">
-          <label>특이사항 <span style="font-size:11px;color:var(--gray-400);font-weight:400;">(선택)</span></label>
-          <textarea id="note" placeholder="수거 방문 가능 시간, 건물 입구/주차 안내, 담당자 부재 시 연락처 등을 자유롭게 입력해 주세요."></textarea>
+          <label for="note">특이사항 <span style="color:var(--ink-muted);font-weight:300;text-transform:none;letter-spacing:0;font-size:12px">선택</span></label>
+          <textarea id="note" placeholder="수거 방문 가능 시간, 건물 입구·주차 안내, 부재 시 연락처 등"></textarea>
         </div>
+
       </div>
     </div>
 
-    <!-- 개인정보 동의 -->
-    <div class="form-card-header" style="border-top: 1px solid #ede8f2;">
-      <div class="step-badge">3</div>
+    <div class="section-head">
+      <div class="section-num">3</div>
       <h2>개인정보 수집 동의</h2>
     </div>
-    <div class="form-card-body">
-      <div class="consent-box">
-        켄델라코리아는 공병 회수 서비스 제공을 위해 아래와 같이 개인정보를 수집·이용합니다.<br>
-        <strong>수집 항목:</strong> 병원명, 연락처, 주소 / <strong>이용 목적:</strong> 택배 수거 및 프로모션 처리 / <strong>보유 기간:</strong> 서비스 완료 후 1년
+    <div class="fields">
+      <div class="consent-box" role="region" aria-label="개인정보 수집 안내">
+        캔델라코리아는 공병 회수 서비스 제공을 위해 개인정보를 수집·이용합니다.<br>
+        <strong>수집 항목</strong> 병원명, 연락처, 주소 &nbsp;|&nbsp;
+        <strong>이용 목적</strong> 택배 수거 및 프로모션 처리 &nbsp;|&nbsp;
+        <strong>보유 기간</strong> 서비스 완료 후 1년
       </div>
       <label class="consent-check">
-        <input type="checkbox" id="consent" />
-        위 개인정보 수집·이용에 동의합니다. (필수)
+        <input type="checkbox" id="consent" aria-required="true" aria-describedby="err-consent" />
+        개인정보 수집·이용에 동의합니다. (필수)
       </label>
+      <span class="consent-err" id="err-consent" role="alert">동의 후 신청이 가능합니다.</span>
+    </div>
 
+    <div class="submit-wrap">
       <button class="submit-btn" id="submitBtn" onclick="submitForm()">
-        🚚 회수 접수 신청하기
+        신청하기
       </button>
     </div>
 
-    <!-- 완료 화면 -->
-    <div class="success-screen" id="successScreen">
-      <div class="success-circle">✅</div>
+    <div class="success-screen" id="successScreen" role="status" aria-live="polite">
+      <div class="success-circle">✓</div>
       <h2>접수가 완료되었습니다</h2>
-      <p>켄델라코리아 담당자가 확인 후 수거 일정을 안내드립니다.<br>문의사항은 <strong>02-0000-0000</strong>으로 연락 주세요.</p>
+      <p>담당자가 확인 후 수거 일정을 안내드립니다.<br>문의 02-6677-1010</p>
       <div class="success-ref" id="refNum"></div>
     </div>
 
   </div>
 
-  <!-- 흐름도 -->
-  <div class="flow-wrap">
-    <p class="flow-title">접수 처리 흐름</p>
-    <div class="flow-steps">
-      <div class="flow-step">
-        <div class="flow-circle fc-1">📝</div>
-        <div class="flow-lbl">병원<br>사이트 접수</div>
-      </div>
-      <div class="flow-step">
-        <div class="flow-circle fc-2">✔️</div>
-        <div class="flow-lbl">켄델라코리아<br>접수 확인</div>
-      </div>
-      <div class="flow-step">
-        <div class="flow-circle fc-3">🚚</div>
-        <div class="flow-lbl">용마로지스<br>수거 배차</div>
-      </div>
-      <div class="flow-step">
-        <div class="flow-circle fc-4">🎁</div>
-        <div class="flow-lbl">수거 완료<br>+ 프로모션 발송</div>
-      </div>
-    </div>
-  </div>
+  <div style="height:24px"></div>
 
-  <div class="footer">© 2024 CANDELA KOREA. All rights reserved.</div>
+  <div class="flow-steps" role="list" aria-label="접수 처리 단계">
+    <div class="flow-step" role="listitem"><div class="flow-emoji">📝</div><div class="flow-lbl">온라인<br>접수</div></div>
+    <div class="flow-step" role="listitem"><div class="flow-emoji">✔</div><div class="flow-lbl">캔델라코리아<br>확인</div></div>
+    <div class="flow-step" role="listitem"><div class="flow-emoji">🚚</div><div class="flow-lbl">용마로지스<br>방문 수거</div></div>
+    <div class="flow-step" role="listitem"><div class="flow-emoji">🎁</div><div class="flow-lbl">프로모션<br>캔 발송</div></div>
+  </div>
 </div>
 
-<div class="loading-overlay" id="loadingOverlay">
+<footer>© 2025 Candela Medical Korea · 문의 02-6677-1010</footer>
+
+<div class="overlay" id="overlay" role="status" aria-live="polite">
   <div class="spinner"></div>
   <p>접수 중입니다...</p>
 </div>
 
 <script>
-  // =============================================
-  // 구글 시트 연동 설정
-  // Apps Script 배포 후 아래 URL을 교체하세요
-  // =============================================
   const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwa_yGGI4MoTtLWMMoDOYZKOSR0TEWADo_BBus6Q5hc7_nxswDdLiKMaNyxJHr01QM-cA/exec';
 
   let boxCount = 1;
 
-  function changeBox(delta) {
-    boxCount = Math.max(1, boxCount + delta);
+  function changeBox(d) {
+    boxCount = Math.max(1, boxCount + d);
     document.getElementById('boxCount').textContent = boxCount;
     document.getElementById('calcText').textContent =
-      `공병 15캔 × ${boxCount}박스 → 증정 DCD ${boxCount}캔`;
+      `15캔 × ${boxCount}박스 → 증정 DCD ${boxCount}캔`;
+  }
+
+  // 전화번호 자동 하이픈
+  document.getElementById('phone').addEventListener('input', function(e) {
+    let v = e.target.value.replace(/\D/g, '');
+    if (v.length <= 3) {
+      e.target.value = v;
+    } else if (v.length <= 7) {
+      e.target.value = v.slice(0,3) + '-' + v.slice(3);
+    } else if (v.length <= 11) {
+      e.target.value = v.slice(0,3) + '-' + v.slice(3,7) + '-' + v.slice(7);
+    } else {
+      e.target.value = v.slice(0,3) + '-' + v.slice(3,7) + '-' + v.slice(7,11);
+    }
+    clearError('f-phone');
+  });
+
+  // 입력 시 에러 클리어
+  ['hospitalName','region','address'].forEach(id => {
+    const el = document.getElementById(id);
+    const evt = id === 'region' ? 'change' : 'input';
+    el.addEventListener(evt, () => clearError('f-' + id.replace('hospitalName','name').replace('address','address').replace('region','region')));
+  });
+
+  function clearError(fieldId) {
+    const f = document.getElementById(fieldId);
+    if (f) f.classList.remove('has-error');
+  }
+
+  function setError(fieldId) {
+    const f = document.getElementById(fieldId);
+    if (f) f.classList.add('has-error');
+    return f;
+  }
+
+  function validatePhone(phone) {
+    return /^01[016789]-\d{3,4}-\d{4}$/.test(phone) || /^0\d{1,2}-\d{3,4}-\d{4}$/.test(phone);
   }
 
   function generateRef() {
@@ -482,63 +452,69 @@
     const ymd = now.getFullYear().toString().slice(2) +
       String(now.getMonth()+1).padStart(2,'0') +
       String(now.getDate()).padStart(2,'0');
-    const rand = Math.floor(Math.random()*9000)+1000;
-    return `CDL-${ymd}-${rand}`;
+    return `CDL-${ymd}-${Math.floor(Math.random()*9000)+1000}`;
   }
 
   async function submitForm() {
-    const name = document.getElementById('hospitalName').value.trim();
-    const phone = document.getElementById('phone').value.trim();
-    const region = document.getElementById('region').value;
+    const name    = document.getElementById('hospitalName').value.trim();
+    const phone   = document.getElementById('phone').value.trim();
+    const region  = document.getElementById('region').value;
     const address = document.getElementById('address').value.trim();
-    const note = document.getElementById('note').value.trim();
+    const note    = document.getElementById('note').value.trim();
     const consent = document.getElementById('consent').checked;
 
-    if (!name) return alert('병원명을 입력해 주세요.');
-    if (!phone) return alert('담당자 연락처를 입력해 주세요.');
-    if (!region) return alert('지역을 선택해 주세요.');
-    if (!address) return alert('상세 주소를 입력해 주세요.');
-    if (!consent) return alert('개인정보 수집·이용에 동의해 주세요.');
+    // 모든 에러 초기화
+    ['f-name','f-phone','f-region','f-address'].forEach(id => {
+      document.getElementById(id).classList.remove('has-error');
+    });
+    document.getElementById('err-consent').classList.remove('show');
+
+    let firstError = null;
+
+    if (!name)              { const f = setError('f-name');    if (!firstError) firstError = f; }
+    if (!validatePhone(phone)) { const f = setError('f-phone'); if (!firstError) firstError = f; }
+    if (!region)            { const f = setError('f-region');  if (!firstError) firstError = f; }
+    if (!address)           { const f = setError('f-address'); if (!firstError) firstError = f; }
+    if (!consent) {
+      document.getElementById('err-consent').classList.add('show');
+      if (!firstError) firstError = document.getElementById('consent');
+    }
+
+    if (firstError) {
+      firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      firstError.focus();
+      return;
+    }
 
     const refNum = generateRef();
     const now = new Date();
-    const timestamp = `${now.getFullYear()}-${String(now.getMonth()+1).padStart(2,'0')}-${String(now.getDate()).padStart(2,'0')} ${String(now.getHours()).padStart(2,'0')}:${String(now.getMinutes()).padStart(2,'0')}`;
+    const ts = `${now.getFullYear()}-${String(now.getMonth()+1).padStart(2,'0')}-${String(now.getDate()).padStart(2,'0')} ${String(now.getHours()).padStart(2,'0')}:${String(now.getMinutes()).padStart(2,'0')}`;
 
     const payload = {
-      접수번호: refNum,
-      접수일시: timestamp,
-      병원명: name,
-      연락처: phone,
-      지역: region,
-      상세주소: address,
-      박스수량: boxCount,
-      증정캔수량: boxCount,
-      특이사항: note,
-      상태: '접수완료'
+      접수번호: refNum, 접수일시: ts,
+      병원명: name, 연락처: phone,
+      지역: region, 상세주소: address,
+      박스수량: boxCount, 증정캔수량: boxCount,
+      특이사항: note, 상태: '접수완료'
     };
 
-    document.getElementById('loadingOverlay').classList.add('show');
+    document.getElementById('overlay').classList.add('show');
     document.getElementById('submitBtn').disabled = true;
 
     try {
       await fetch(GOOGLE_SCRIPT_URL, {
-        method: 'POST',
-        mode: 'no-cors',
+        method: 'POST', mode: 'no-cors',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload)
       });
-    } catch(e) {
-      console.log('전송 오류 (no-cors 정상):', e);
-    }
+    } catch(e) {}
 
     setTimeout(() => {
-      document.getElementById('loadingOverlay').classList.remove('show');
-      // 폼 숨기고 완료 화면 표시
-      const sections = document.querySelectorAll('.form-card-header, .form-card-body');
-      sections.forEach(s => s.style.display = 'none');
-      const successEl = document.getElementById('successScreen');
-      successEl.style.display = 'block';
-      document.getElementById('refNum').textContent = `접수번호: ${refNum}`;
+      document.getElementById('overlay').classList.remove('show');
+      document.querySelectorAll('.section-head, .fields, .submit-wrap').forEach(el => el.style.display = 'none');
+      const s = document.getElementById('successScreen');
+      s.style.display = 'block';
+      document.getElementById('refNum').textContent = `접수번호 ${refNum}`;
     }, 1500);
   }
 </script>
