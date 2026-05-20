@@ -11,63 +11,115 @@
     --purple-mid: #3D0D52;
     --purple-light: #5a1a7a;
     --magenta: #C850A0;
-    --magenta-pale: rgba(200,80,160,0.1);
-    --white: #fff;
     --bg: #f5f2f9;
     --gray-200: #ede8f2;
     --gray-400: #b0a0bc;
     --gray-600: #6b5c7a;
     --text: #1a0a24;
     --radius: 10px;
-    --status-new: #EEEDFE;
-    --status-new-text: #3C3489;
-    --status-scheduled: #FAEEDA;
-    --status-scheduled-text: #633806;
-    --status-done: #EAF3DE;
-    --status-done-text: #27500A;
-    --status-cancel: #FCEBEB;
-    --status-cancel-text: #791F1F;
+    --status-new: #EEEDFE; --status-new-text: #3C3489;
+    --status-scheduled: #FAEEDA; --status-scheduled-text: #633806;
+    --status-done: #EAF3DE; --status-done-text: #27500A;
+    --status-cancel: #FCEBEB; --status-cancel-text: #791F1F;
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
-  body { font-family: 'Noto Sans KR', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; display: flex; }
-  .sidebar { width: 200px; background: var(--purple-deep); min-height: 100vh; flex-shrink: 0; display: flex; flex-direction: column; }
-  .sidebar-logo { padding: 22px 18px 18px; border-bottom: 1px solid var(--purple-light); }
-  .logo-row { display: flex; align-items: center; gap: 7px; margin-bottom: 2px; }
-  .logo-dot { width: 8px; height: 8px; background: var(--magenta); border-radius: 50%; }
-  .logo-name { color: #fff; font-size: 13px; font-weight: 700; letter-spacing: 1px; }
-  .logo-sub { font-size: 10px; color: rgba(255,255,255,0.4); padding-left: 15px; }
-  .sidebar-menu { padding: 14px 0; flex: 1; }
-  .menu-label { font-size: 9px; font-weight: 700; color: rgba(255,255,255,0.3); letter-spacing: 1px; padding: 0 18px 8px; }
-  .menu-item { display: flex; align-items: center; gap: 9px; padding: 10px 18px; font-size: 12px; font-weight: 500; color: rgba(255,255,255,0.6); cursor: pointer; transition: all 0.15s; text-decoration: none; }
-  .menu-item:hover { color: #fff; background: rgba(255,255,255,0.07); }
-  .menu-item.active { color: #fff; background: rgba(200,80,160,0.25); border-right: 3px solid var(--magenta); }
-  .menu-icon { font-size: 15px; }
-  .sidebar-footer { padding: 14px 18px; border-top: 1px solid var(--purple-light); font-size: 10px; color: rgba(255,255,255,0.3); }
-  .main { flex: 1; display: flex; flex-direction: column; min-height: 100vh; }
-  .topbar { background: #fff; height: 52px; padding: 0 24px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid var(--gray-200); }
+  body { font-family: 'Noto Sans KR', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
+
+  /* ── 로그인 화면 ── */
+  .login-wrap {
+    min-height: 100vh;
+    display: flex; align-items: center; justify-content: center;
+    background: var(--purple-deep);
+  }
+  .login-card {
+    background: #fff;
+    border-radius: 16px;
+    padding: 40px 36px;
+    width: 360px;
+    max-width: 90vw;
+    box-shadow: 0 8px 40px rgba(0,0,0,0.3);
+  }
+  .login-logo {
+    display: flex; align-items: center; gap: 8px; margin-bottom: 28px;
+  }
+  .login-dot { width: 10px; height: 10px; background: var(--magenta); border-radius: 50%; }
+  .login-brand { font-size: 14px; font-weight: 700; letter-spacing: 1px; color: var(--purple-deep); }
+  .login-card h2 { font-size: 18px; font-weight: 700; color: var(--text); margin-bottom: 6px; }
+  .login-card p { font-size: 12px; color: var(--gray-600); margin-bottom: 24px; }
+  .login-label { font-size: 11px; font-weight: 700; color: var(--gray-600); letter-spacing: 0.5px; display: block; margin-bottom: 6px; }
+  .login-input {
+    width: 100%; border: 1px solid var(--gray-200); border-radius: 8px;
+    padding: 11px 14px; font-size: 14px; font-family: 'Noto Sans KR', sans-serif;
+    color: var(--text); outline: none; transition: border-color 0.15s;
+    margin-bottom: 16px;
+  }
+  .login-input:focus { border-color: var(--magenta); box-shadow: 0 0 0 3px rgba(200,80,160,0.1); }
+  .login-input.error { border-color: #dc2626; background: #fff5f5; }
+  .login-err { font-size: 12px; color: #dc2626; margin-top: -12px; margin-bottom: 14px; display: none; }
+  .login-err.show { display: block; }
+  .login-btn {
+    width: 100%; padding: 13px; background: var(--purple-deep); color: #fff;
+    border: none; border-radius: 8px; font-size: 14px; font-weight: 700;
+    font-family: 'Noto Sans KR', sans-serif; cursor: pointer; transition: opacity 0.15s;
+  }
+  .login-btn:hover { opacity: 0.88; }
+
+  /* ── 어드민 본체 (로그인 후) ── */
+  .admin-wrap { display: none; min-height: 100vh; display: none; flex-direction: column; }
+  .admin-wrap.show { display: flex; }
+
+  .topbar {
+    background: #fff; height: 52px; padding: 0 24px;
+    display: flex; align-items: center; justify-content: space-between;
+    border-bottom: 1px solid var(--gray-200); position: sticky; top: 0; z-index: 10;
+  }
+  .topbar-left { display: flex; align-items: center; gap: 10px; }
+  .topbar-dot { width: 8px; height: 8px; background: var(--magenta); border-radius: 50%; }
   .topbar-title { font-size: 14px; font-weight: 700; color: var(--text); }
-  .topbar-right { display: flex; align-items: center; gap: 12px; }
-  .admin-badge { background: var(--purple-deep); color: #fff; font-size: 10px; font-weight: 700; padding: 3px 10px; border-radius: 20px; letter-spacing: 0.5px; }
-  .refresh-btn { background: none; border: 1px solid var(--gray-200); border-radius: 7px; padding: 6px 12px; font-size: 11px; font-weight: 700; color: var(--gray-600); cursor: pointer; font-family: 'Noto Sans KR', sans-serif; display: flex; align-items: center; gap: 5px; transition: all 0.15s; }
+  .topbar-right { display: flex; align-items: center; gap: 10px; }
+  .admin-badge { background: var(--purple-deep); color: #fff; font-size: 10px; font-weight: 700; padding: 3px 10px; border-radius: 20px; }
+  .logout-btn {
+    background: none; border: 1px solid var(--gray-200); border-radius: 7px;
+    padding: 5px 12px; font-size: 11px; font-weight: 700; color: var(--gray-600);
+    cursor: pointer; font-family: 'Noto Sans KR', sans-serif; transition: all 0.15s;
+  }
+  .logout-btn:hover { border-color: #dc2626; color: #dc2626; }
+  .refresh-btn {
+    background: none; border: 1px solid var(--gray-200); border-radius: 7px;
+    padding: 5px 12px; font-size: 11px; font-weight: 700; color: var(--gray-600);
+    cursor: pointer; font-family: 'Noto Sans KR', sans-serif; transition: all 0.15s;
+    display: flex; align-items: center; gap: 4px;
+  }
   .refresh-btn:hover { border-color: var(--magenta); color: var(--magenta); }
-  .content { padding: 24px; flex: 1; }
+
+  .content { padding: 24px; flex: 1; max-width: 1200px; width: 100%; margin: 0 auto; }
+
   .stat-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 24px; }
   .stat-card { background: #fff; border-radius: var(--radius); border: 1px solid var(--gray-200); padding: 16px 18px; }
   .stat-label { font-size: 11px; font-weight: 700; color: var(--gray-600); letter-spacing: 0.3px; margin-bottom: 6px; }
   .stat-val { font-size: 26px; font-weight: 700; color: var(--text); }
   .stat-sub { font-size: 11px; color: var(--gray-400); margin-top: 2px; }
   .stat-accent { color: var(--magenta); }
-  .filter-bar { background: #fff; border-radius: var(--radius); border: 1px solid var(--gray-200); padding: 14px 18px; margin-bottom: 16px; display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
-  .filter-bar input, .filter-bar select { border: 1px solid var(--gray-200); border-radius: 7px; padding: 7px 11px; font-size: 12px; font-family: 'Noto Sans KR', sans-serif; color: var(--text); outline: none; transition: border-color 0.15s; }
+
+  .filter-bar {
+    background: #fff; border-radius: var(--radius); border: 1px solid var(--gray-200);
+    padding: 14px 18px; margin-bottom: 16px;
+    display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
+  }
+  .filter-bar input, .filter-bar select {
+    border: 1px solid var(--gray-200); border-radius: 7px; padding: 7px 11px;
+    font-size: 12px; font-family: 'Noto Sans KR', sans-serif; color: var(--text); outline: none;
+  }
   .filter-bar input { min-width: 180px; }
   .filter-bar input:focus, .filter-bar select:focus { border-color: var(--magenta); }
   .filter-label { font-size: 11px; font-weight: 700; color: var(--gray-600); white-space: nowrap; }
+
   .table-card { background: #fff; border-radius: var(--radius); border: 1px solid var(--gray-200); overflow: hidden; }
   .table-header { padding: 14px 18px; border-bottom: 1px solid var(--gray-200); display: flex; align-items: center; justify-content: space-between; }
   .table-header h3 { font-size: 13px; font-weight: 700; }
   .table-count { font-size: 11px; color: var(--gray-600); }
   table { width: 100%; border-collapse: collapse; }
-  thead th { background: var(--bg); padding: 10px 14px; text-align: left; font-size: 11px; font-weight: 700; color: var(--gray-600); letter-spacing: 0.3px; border-bottom: 1px solid var(--gray-200); white-space: nowrap; }
+  thead th { background: var(--bg); padding: 10px 14px; text-align: left; font-size: 11px; font-weight: 700; color: var(--gray-600); border-bottom: 1px solid var(--gray-200); white-space: nowrap; }
   tbody tr { border-bottom: 1px solid var(--gray-200); transition: background 0.1s; }
   tbody tr:last-child { border-bottom: none; }
   tbody tr:hover { background: #fdf9ff; }
@@ -75,25 +127,30 @@
   .td-ref { font-weight: 700; color: var(--purple-deep); font-size: 11px; }
   .td-hospital { font-weight: 700; }
   .td-phone { color: var(--gray-600); }
-  .td-region { font-size: 11px; }
   .td-boxes { font-weight: 700; text-align: center; }
   .td-promo { font-size: 11px; color: var(--magenta); font-weight: 700; text-align: center; }
   .td-note { font-size: 11px; color: var(--gray-600); max-width: 140px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-  .status-badge { display: inline-block; padding: 3px 9px; border-radius: 20px; font-size: 10px; font-weight: 700; letter-spacing: 0.3px; white-space: nowrap; }
+
+  .status-badge { display: inline-block; padding: 3px 9px; border-radius: 20px; font-size: 10px; font-weight: 700; white-space: nowrap; }
   .s-new { background: var(--status-new); color: var(--status-new-text); }
   .s-scheduled { background: var(--status-scheduled); color: var(--status-scheduled-text); }
   .s-done { background: var(--status-done); color: var(--status-done-text); }
   .s-cancel { background: var(--status-cancel); color: var(--status-cancel-text); }
+
   .status-select { border: 1px solid var(--gray-200); border-radius: 6px; padding: 4px 7px; font-size: 11px; font-family: 'Noto Sans KR', sans-serif; color: var(--text); background: #fff; cursor: pointer; outline: none; }
-  .status-select:focus { border-color: var(--magenta); }
   .action-btn { background: none; border: 1px solid var(--gray-200); border-radius: 6px; padding: 4px 9px; font-size: 10px; font-weight: 700; color: var(--gray-600); cursor: pointer; font-family: 'Noto Sans KR', sans-serif; transition: all 0.15s; margin-left: 4px; }
   .action-btn:hover { border-color: var(--purple-deep); color: var(--purple-deep); }
   .action-btn.call { border-color: #1a7a4a; color: #1a7a4a; }
   .action-btn.call:hover { background: #eaf3de; }
   .empty-state { text-align: center; padding: 48px; color: var(--gray-400); font-size: 13px; }
+  .loading-msg { text-align: center; padding: 48px; color: var(--gray-400); font-size: 13px; }
+
+  .export-btn { background: #1a7a4a; color: #fff; border: none; border-radius: 7px; padding: 7px 14px; font-size: 11px; font-weight: 700; cursor: pointer; font-family: 'Noto Sans KR', sans-serif; display: flex; align-items: center; gap: 5px; transition: opacity 0.15s; }
+  .export-btn:hover { opacity: 0.85; }
+
   .modal-backdrop { display: none; position: fixed; inset: 0; background: rgba(45,10,62,0.5); z-index: 100; align-items: center; justify-content: center; }
   .modal-backdrop.show { display: flex; }
-  .modal { background: #fff; border-radius: var(--radius); width: 480px; max-width: 90vw; padding: 0; overflow: hidden; }
+  .modal { background: #fff; border-radius: var(--radius); width: 480px; max-width: 90vw; overflow: hidden; }
   .modal-header { background: var(--purple-deep); padding: 16px 20px; display: flex; justify-content: space-between; align-items: center; }
   .modal-header h3 { font-size: 14px; font-weight: 700; color: #fff; }
   .modal-close { background: none; border: none; color: rgba(255,255,255,0.6); font-size: 18px; cursor: pointer; padding: 0; line-height: 1; }
@@ -102,39 +159,46 @@
   .detail-row:last-child { border-bottom: none; }
   .detail-key { font-weight: 700; color: var(--gray-600); min-width: 100px; flex-shrink: 0; }
   .detail-val { color: var(--text); }
-  .export-btn { background: #1a7a4a; color: #fff; border: none; border-radius: 7px; padding: 7px 14px; font-size: 11px; font-weight: 700; cursor: pointer; font-family: 'Noto Sans KR', sans-serif; display: flex; align-items: center; gap: 5px; transition: opacity 0.15s; }
-  .export-btn:hover { opacity: 0.85; }
   .sms-btn { width: 100%; padding: 12px; background: var(--purple-deep); color: #fff; border: none; border-radius: 8px; font-size: 13px; font-weight: 700; cursor: pointer; font-family: 'Noto Sans KR', sans-serif; margin-top: 4px; transition: opacity 0.15s; }
   .sms-btn:hover { opacity: 0.85; }
-  .loading-msg { text-align: center; padding: 48px; color: var(--gray-400); font-size: 13px; }
-  @media (max-width: 768px) { .sidebar { display: none; } .stat-grid { grid-template-columns: repeat(2, 1fr); } }
+
+  @media (max-width: 768px) {
+    .stat-grid { grid-template-columns: repeat(2, 1fr); }
+    .content { padding: 16px; }
+  }
 </style>
 </head>
 <body>
 
-<aside class="sidebar">
-  <div class="sidebar-logo">
-    <div class="logo-row"><div class="logo-dot"></div><span class="logo-name">CANDELA</span></div>
-    <div class="logo-sub">KOREA ADMIN</div>
+<!-- ── 로그인 화면 ── -->
+<div class="login-wrap" id="loginWrap">
+  <div class="login-card">
+    <div class="login-logo">
+      <div class="login-dot"></div>
+      <span class="login-brand">CANDELA KOREA</span>
+    </div>
+    <h2>어드민 로그인</h2>
+    <p>담당자 전용 페이지입니다. 비밀번호를 입력해 주세요.</p>
+    <label class="login-label" for="pwInput">비밀번호</label>
+    <input type="password" class="login-input" id="pwInput"
+      placeholder="비밀번호 입력"
+      onkeydown="if(event.key==='Enter') doLogin()" />
+    <div class="login-err" id="loginErr">비밀번호가 올바르지 않습니다.</div>
+    <button class="login-btn" onclick="doLogin()">로그인</button>
   </div>
-  <nav class="sidebar-menu">
-    <div class="menu-label">메뉴</div>
-    <a class="menu-item active" href="#"><span class="menu-icon">📋</span> 공병 회수 접수</a>
-    <a class="menu-item" href="#"><span class="menu-icon">📊</span> 통계</a>
-    <a class="menu-item" href="#"><span class="menu-icon">🏥</span> 병원 관리</a>
-    <a class="menu-item" href="#"><span class="menu-icon">🚚</span> 배차 현황</a>
-    <div class="menu-label" style="margin-top:14px">설정</div>
-    <a class="menu-item" href="#"><span class="menu-icon">⚙️</span> 환경설정</a>
-  </nav>
-  <div class="sidebar-footer">CANDELA KOREA v1.0</div>
-</aside>
+</div>
 
-<div class="main">
+<!-- ── 어드민 본체 ── -->
+<div class="admin-wrap" id="adminWrap">
   <div class="topbar">
-    <span class="topbar-title">DCD 공병 회수 접수 관리</span>
+    <div class="topbar-left">
+      <div class="topbar-dot"></div>
+      <span class="topbar-title">DCD 공병 회수 접수 관리</span>
+    </div>
     <div class="topbar-right">
       <button class="refresh-btn" onclick="loadData()">🔄 새로고침</button>
       <span class="admin-badge">ADMIN</span>
+      <button class="logout-btn" onclick="doLogout()">로그아웃</button>
     </div>
   </div>
 
@@ -152,10 +216,7 @@
       <span class="filter-label">상태</span>
       <select id="statusFilter" onchange="renderTable()">
         <option value="">전체</option>
-        <option value="접수완료">접수완료</option>
-        <option value="배차완료">배차완료</option>
-        <option value="수거완료">수거완료</option>
-        <option value="취소">취소</option>
+        <option>접수완료</option><option>배차완료</option><option>수거완료</option><option>취소</option>
       </select>
       <span class="filter-label">지역</span>
       <select id="regionFilter" onchange="renderTable()">
@@ -188,6 +249,7 @@
   </div>
 </div>
 
+<!-- 모달 -->
 <div class="modal-backdrop" id="modal">
   <div class="modal">
     <div class="modal-header">
@@ -199,8 +261,46 @@
 </div>
 
 <script>
-  const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwa_yGGI4MoTtLWMMoDOYZKOSR0TEWADo_BBus6Q5hc7_nxswDdLiKMaNyxJHr01QM-cA/exec';
+  // =============================================
+  // ⚠️ 아래 두 값을 직접 변경하세요
+  // ADMIN_PASSWORD : 어드민 로그인 비밀번호
+  // SUBMIT_TOKEN   : 가짜 접수 차단용 토큰
+  //                  (영문+숫자 조합 20자 이상 권장)
+  // =============================================
+  const ADMIN_PASSWORD = '2024KBHkbh!!!!';
+  const SUBMIT_TOKEN   = 'wWhffkWk-!@sksmsep;34-dn1!wpswkd__9';
 
+  const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwa_yGGI4MoTtLWMMoDOYZKOSR0TEWADo_BBus6Q5hc7_nxswDdLiKMaNyxJHr01QM-cA/exec';
+  const SESSION_KEY = 'cdl_admin_auth';
+
+  // ── 로그인 ──────────────────────────────────
+  function doLogin() {
+    const pw = document.getElementById('pwInput').value;
+    if (pw === ADMIN_PASSWORD) {
+      sessionStorage.setItem(SESSION_KEY, 'true');
+      document.getElementById('loginWrap').style.display = 'none';
+      document.getElementById('adminWrap').classList.add('show');
+      loadData();
+    } else {
+      document.getElementById('pwInput').classList.add('error');
+      document.getElementById('loginErr').classList.add('show');
+      document.getElementById('pwInput').value = '';
+      document.getElementById('pwInput').focus();
+    }
+  }
+
+  function doLogout() {
+    sessionStorage.removeItem(SESSION_KEY);
+    location.reload();
+  }
+
+  // 세션 유지 (새로고침 시 재로그인 불필요)
+  if (sessionStorage.getItem(SESSION_KEY) === 'true') {
+    document.getElementById('loginWrap').style.display = 'none';
+    document.getElementById('adminWrap').classList.add('show');
+  }
+
+  // ── 데이터 ──────────────────────────────────
   let allData = [];
   let filtered = [];
 
@@ -215,44 +315,38 @@
   function updateStats() {
     document.getElementById('statTotal').textContent = allData.length;
     document.getElementById('statPending').textContent = allData.filter(d => d.상태 === '접수완료').length;
-    const boxes = allData.reduce((a,b) => a + (parseInt(b.박스수량)||0), 0);
-    const cans = allData.reduce((a,b) => a + (parseInt(b.증정캔수량)||0), 0);
-    document.getElementById('statBoxes').textContent = boxes;
-    document.getElementById('statCans').textContent = cans;
+    document.getElementById('statBoxes').textContent = allData.reduce((a,b) => a+(parseInt(b.박스수량)||0), 0);
+    document.getElementById('statCans').textContent = allData.reduce((a,b) => a+(parseInt(b.증정캔수량)||0), 0);
   }
 
   function renderTable() {
     const q = document.getElementById('searchInput').value.toLowerCase();
-    const sFilter = document.getElementById('statusFilter').value;
-    const rFilter = document.getElementById('regionFilter').value;
-
+    const sF = document.getElementById('statusFilter').value;
+    const rF = document.getElementById('regionFilter').value;
     filtered = allData.filter(d => {
-      const matchQ = !q || d.병원명.includes(q) || d.접수번호.toLowerCase().includes(q);
-      const matchS = !sFilter || d.상태 === sFilter;
-      const matchR = !rFilter || d.지역 === rFilter;
-      return matchQ && matchS && matchR;
+      const mQ = !q || d.병원명.includes(q) || d.접수번호.toLowerCase().includes(q);
+      const mS = !sF || d.상태 === sF;
+      const mR = !rF || d.지역 === rF;
+      return mQ && mS && mR;
     });
-
     document.getElementById('tableCount').textContent = `${filtered.length}건`;
-
     const tbody = document.getElementById('tableBody');
-    if (filtered.length === 0) {
+    if (!filtered.length) {
       tbody.innerHTML = `<tr><td colspan="10"><div class="empty-state">접수 내역이 없습니다.</div></td></tr>`;
       return;
     }
-
-    tbody.innerHTML = filtered.map((d) => `
+    tbody.innerHTML = filtered.map(d => `
       <tr>
         <td class="td-ref">${d.접수번호}</td>
         <td style="font-size:11px;color:var(--gray-600)">${d.접수일시}</td>
         <td class="td-hospital">${d.병원명}</td>
         <td class="td-phone">${d.연락처}</td>
-        <td class="td-region">${d.지역}</td>
+        <td>${d.지역}</td>
         <td class="td-boxes">${d.박스수량}박스</td>
         <td class="td-promo">${d.증정캔수량}캔</td>
-        <td class="td-note" title="${d.특이사항}">${d.특이사항 || '-'}</td>
+        <td class="td-note" title="${d.특이사항}">${d.특이사항||'-'}</td>
         <td>
-          <select class="status-select" onchange="changeStatus(${allData.indexOf(d)}, this.value)">
+          <select class="status-select" onchange="changeStatus(${allData.indexOf(d)},this.value)">
             <option ${d.상태==='접수완료'?'selected':''}>접수완료</option>
             <option ${d.상태==='배차완료'?'selected':''}>배차완료</option>
             <option ${d.상태==='수거완료'?'selected':''}>수거완료</option>
@@ -267,10 +361,9 @@
     `).join('');
   }
 
-  function changeStatus(idx, newStatus) {
-    allData[idx].상태 = newStatus;
-    updateStats();
-    renderTable();
+  function changeStatus(idx, v) {
+    allData[idx].상태 = v;
+    updateStats(); renderTable();
   }
 
   function showDetail(idx) {
@@ -284,8 +377,8 @@
       <div class="detail-row"><div class="detail-key">지역</div><div class="detail-val">${d.지역}</div></div>
       <div class="detail-row"><div class="detail-key">상세 주소</div><div class="detail-val">${d.상세주소}</div></div>
       <div class="detail-row"><div class="detail-key">회수 박스</div><div class="detail-val">${d.박스수량}박스 (공병 ${d.박스수량*15}캔)</div></div>
-      <div class="detail-row"><div class="detail-key">증정 캔 수량</div><div class="detail-val" style="color:var(--magenta);font-weight:700">DCD ${d.증정캔수량}캔</div></div>
-      <div class="detail-row"><div class="detail-key">특이사항</div><div class="detail-val">${d.특이사항 || '없음'}</div></div>
+      <div class="detail-row"><div class="detail-key">증정 캔</div><div class="detail-val" style="color:var(--magenta);font-weight:700">DCD ${d.증정캔수량}캔</div></div>
+      <div class="detail-row"><div class="detail-key">특이사항</div><div class="detail-val">${d.특이사항||'없음'}</div></div>
       <div class="detail-row"><div class="detail-key">상태</div><div class="detail-val"><span class="status-badge ${statusClass(d.상태)}">${d.상태}</span></div></div>
       <div style="margin-top:16px;padding-top:14px;border-top:1px solid #ede8f2">
         <button class="sms-btn" onclick="send수거완료문자('${d.병원명}','${d.연락처}','${d.증정캔수량}')">
@@ -296,21 +389,15 @@
     document.getElementById('modal').classList.add('show');
   }
 
-  function closeModal() {
-    document.getElementById('modal').classList.remove('show');
-  }
+  function closeModal() { document.getElementById('modal').classList.remove('show'); }
 
   async function send수거완료문자(병원명, 연락처, 증정캔수량) {
     const 운송장 = prompt('운송장번호를 입력하세요:');
     if (!운송장) return;
     await fetch(GOOGLE_SCRIPT_URL, {
-      method: 'POST',
-      mode: 'no-cors',
+      method: 'POST', mode: 'no-cors',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        action: 'sendSMS',
-        병원명, 연락처, 증정캔수량, 운송장번호: 운송장
-      })
+      body: JSON.stringify({ action: 'sendSMS', token: SUBMIT_TOKEN, 병원명, 연락처, 증정캔수량, 운송장번호: 운송장 })
     });
     alert('✅ 수거완료 문자가 발송되었습니다!');
     closeModal();
@@ -320,39 +407,28 @@
     const headers = ['접수번호','접수일시','병원명','연락처','지역','상세주소','박스수량','증정캔수량','특이사항','상태'];
     const rows = filtered.map(d => headers.map(h => `"${(d[h]||'').toString().replace(/"/g,'""')}"`).join(','));
     const csv = '\uFEFF' + headers.join(',') + '\n' + rows.join('\n');
-    const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
     const a = document.createElement('a');
-    a.href = URL.createObjectURL(blob);
-    a.download = `공병회수_접수목록_${new Date().toISOString().slice(0,10)}.csv`;
+    a.href = URL.createObjectURL(new Blob([csv], {type:'text/csv;charset=utf-8;'}));
+    a.download = `공병회수_${new Date().toISOString().slice(0,10)}.csv`;
     a.click();
   }
 
   async function loadData() {
     try {
       document.getElementById('tableCount').textContent = '로딩 중...';
-      document.getElementById('tableBody').innerHTML = `<tr><td colspan="10"><div class="loading-msg">⏳ 데이터 불러오는 중...</div></td></tr>`;
-      const res = await fetch(GOOGLE_SCRIPT_URL);
+      document.getElementById('tableBody').innerHTML = `<tr><td colspan="10"><div class="loading-msg">⏳ 불러오는 중...</div></td></tr>`;
+      const res = await fetch(`${GOOGLE_SCRIPT_URL}?token=${SUBMIT_TOKEN}`);
       const json = await res.json();
-      if (json.data && json.data.length > 0) {
-        allData = json.data.map(d => ({
-          접수번호: d['접수번호'] || '',
-          접수일시: d['접수일시'] || '',
-          병원명: d['병원명'] || '',
-          연락처: d['연락처'] || '',
-          지역: d['지역'] || '',
-          상세주소: d['상세주소'] || '',
-          박스수량: parseInt(d['박스수량']) || 0,
-          증정캔수량: parseInt(d['증정캔수량']) || 0,
-          특이사항: d['특이사항'] || '',
-          상태: d['상태'] || '접수완료'
-        }));
-      } else {
-        allData = [];
-      }
-      updateStats();
-      renderTable();
+      allData = (json.data||[]).map(d => ({
+        접수번호: d['접수번호']||'', 접수일시: d['접수일시']||'',
+        병원명: d['병원명']||'', 연락처: d['연락처']||'',
+        지역: d['지역']||'', 상세주소: d['상세주소']||'',
+        박스수량: parseInt(d['박스수량'])||0, 증정캔수량: parseInt(d['증정캔수량'])||0,
+        특이사항: d['특이사항']||'', 상태: d['상태']||'접수완료'
+      }));
+      updateStats(); renderTable();
     } catch(e) {
-      document.getElementById('tableBody').innerHTML = `<tr><td colspan="10"><div class="empty-state">⚠️ 데이터 로드 실패. 새로고침 버튼을 눌러주세요.</div></td></tr>`;
+      document.getElementById('tableBody').innerHTML = `<tr><td colspan="10"><div class="empty-state">⚠️ 데이터 로드 실패. 새로고침 해주세요.</div></td></tr>`;
       document.getElementById('tableCount').textContent = '오류';
     }
   }
@@ -361,8 +437,8 @@
     if (e.target === this) closeModal();
   });
 
-  // 페이지 열자마자 구글 시트에서 자동 로드
-  loadData();
+  // 로그인 상태면 자동 로드
+  if (sessionStorage.getItem(SESSION_KEY) === 'true') loadData();
 </script>
 </body>
 </html>
