@@ -417,7 +417,7 @@
     try {
       document.getElementById('tableCount').textContent = '로딩 중...';
       document.getElementById('tableBody').innerHTML = `<tr><td colspan="10"><div class="loading-msg">⏳ 불러오는 중...</div></td></tr>`;
-      const res = await fetch(`${GOOGLE_SCRIPT_URL}?token=${SUBMIT_TOKEN}`);
+const res = await fetch(GOOGLE_SCRIPT_URL + '?token=wWhffkWk-!@sksmsep;34-dn1!wpswkd__9');
       const json = await res.json();
       allData = (json.data||[]).map(d => ({
         접수번호: d['접수번호']||'', 접수일시: d['접수일시']||'',
