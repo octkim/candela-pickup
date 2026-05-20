@@ -106,6 +106,7 @@
   .export-btn:hover { opacity: 0.85; }
   .sms-btn { width: 100%; padding: 12px; background: var(--purple-deep); color: #fff; border: none; border-radius: 8px; font-size: 13px; font-weight: 700; cursor: pointer; font-family: 'Noto Sans KR', sans-serif; margin-top: 4px; transition: opacity 0.15s; }
   .sms-btn:hover { opacity: 0.85; }
+  .loading-msg { text-align: center; padding: 48px; color: var(--gray-400); font-size: 13px; }
   @media (max-width: 768px) { .sidebar { display: none; } .stat-grid { grid-template-columns: repeat(2, 1fr); } }
 </style>
 </head>
@@ -168,7 +169,7 @@
     <div class="table-card">
       <div class="table-header">
         <h3>접수 목록</h3>
-        <span class="table-count" id="tableCount">0건</span>
+        <span class="table-count" id="tableCount">로딩 중...</span>
       </div>
       <div style="overflow-x:auto;">
         <table>
@@ -178,7 +179,9 @@
               <th>지역</th><th>박스</th><th>증정</th><th>특이사항</th><th>상태</th><th>액션</th>
             </tr>
           </thead>
-          <tbody id="tableBody"></tbody>
+          <tbody id="tableBody">
+            <tr><td colspan="10"><div class="loading-msg">⏳ 데이터 불러오는 중...</div></td></tr>
+          </tbody>
         </table>
       </div>
     </div>
@@ -198,15 +201,8 @@
 <script>
   const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwa_yGGI4MoTtLWMMoDOYZKOSR0TEWADo_BBus6Q5hc7_nxswDdLiKMaNyxJHr01QM-cA/exec';
 
-  let allData = [
-    { 접수번호:'CDL-240115-1234', 접수일시:'2024-01-15 09:23', 병원명:'강남성형외과', 연락처:'010-1234-5678', 지역:'서울', 상세주소:'강남구 테헤란로 123', 박스수량:3, 증정캔수량:3, 특이사항:'오전 10시 이후 방문 요청', 상태:'접수완료' },
-    { 접수번호:'CDL-240115-5678', 접수일시:'2024-01-15 10:41', 병원명:'부산피부과의원', 연락처:'010-9876-5432', 지역:'부산', 상세주소:'해운대구 마린시티로 55', 박스수량:1, 증정캔수량:1, 특이사항:'', 상태:'배차완료' },
-    { 접수번호:'CDL-240114-9012', 접수일시:'2024-01-14 14:05', 병원명:'이데아클리닉', 연락처:'010-5555-7777', 지역:'서울', 상세주소:'서초구 반포대로 200', 박스수량:5, 증정캔수량:5, 특이사항:'지하 1층 주차장으로 방문', 상태:'수거완료' },
-    { 접수번호:'CDL-240114-3456', 접수일시:'2024-01-14 16:30', 병원명:'광명피부과', 연락처:'010-2222-3333', 지역:'경기', 상세주소:'광명시 철산로 100', 박스수량:2, 증정캔수량:2, 특이사항:'', 상태:'접수완료' },
-    { 접수번호:'CDL-240113-7890', 접수일시:'2024-01-13 11:15', 병원명:'대전 한빛의원', 연락처:'010-4444-6666', 지역:'대전', 상세주소:'유성구 대학로 99', 박스수량:4, 증정캔수량:4, 특이사항:'담당자 김OO 010-4444-6666', 상태:'수거완료' },
-  ];
-
-  let filtered = [...allData];
+  let allData = [];
+  let filtered = [];
 
   function statusClass(s) {
     if (s === '접수완료') return 's-new';
@@ -241,7 +237,7 @@
 
     const tbody = document.getElementById('tableBody');
     if (filtered.length === 0) {
-      tbody.innerHTML = `<tr><td colspan="10"><div class="empty-state">조건에 맞는 접수 내역이 없습니다.</div></td></tr>`;
+      tbody.innerHTML = `<tr><td colspan="10"><div class="empty-state">접수 내역이 없습니다.</div></td></tr>`;
       return;
     }
 
@@ -332,15 +328,41 @@
   }
 
   async function loadData() {
-    alert('구글 시트 연동 후 실시간 데이터를 불러옵니다.\n(현재 데모 데이터 표시 중)');
+    try {
+      document.getElementById('tableCount').textContent = '로딩 중...';
+      document.getElementById('tableBody').innerHTML = `<tr><td colspan="10"><div class="loading-msg">⏳ 데이터 불러오는 중...</div></td></tr>`;
+      const res = await fetch(GOOGLE_SCRIPT_URL);
+      const json = await res.json();
+      if (json.data && json.data.length > 0) {
+        allData = json.data.map(d => ({
+          접수번호: d['접수번호'] || '',
+          접수일시: d['접수일시'] || '',
+          병원명: d['병원명'] || '',
+          연락처: d['연락처'] || '',
+          지역: d['지역'] || '',
+          상세주소: d['상세주소'] || '',
+          박스수량: parseInt(d['박스수량']) || 0,
+          증정캔수량: parseInt(d['증정캔수량']) || 0,
+          특이사항: d['특이사항'] || '',
+          상태: d['상태'] || '접수완료'
+        }));
+      } else {
+        allData = [];
+      }
+      updateStats();
+      renderTable();
+    } catch(e) {
+      document.getElementById('tableBody').innerHTML = `<tr><td colspan="10"><div class="empty-state">⚠️ 데이터 로드 실패. 새로고침 버튼을 눌러주세요.</div></td></tr>`;
+      document.getElementById('tableCount').textContent = '오류';
+    }
   }
 
   document.getElementById('modal').addEventListener('click', function(e) {
     if (e.target === this) closeModal();
   });
 
-  updateStats();
-  renderTable();
+  // 페이지 열자마자 구글 시트에서 자동 로드
+  loadData();
 </script>
 </body>
 </html>
